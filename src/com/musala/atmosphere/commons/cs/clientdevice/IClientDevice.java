@@ -33,9 +33,10 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws CommandFailedException
 	 * 
 	 */
-	public void executeShellCommand(String shellCommand) throws RemoteException;
+	public String executeShellCommand(String shellCommand) throws RemoteException;
 
 	/**
 	 * Sends sequence of shell commands to be executed on the testing device.
