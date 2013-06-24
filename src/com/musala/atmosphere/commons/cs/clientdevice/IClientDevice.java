@@ -1,9 +1,12 @@
 package com.musala.atmosphere.commons.cs.clientdevice;
 
+import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import com.musala.atmosphere.commons.BatteryState;
+import com.musala.atmosphere.commons.CommandFailedException;
 import com.musala.atmosphere.commons.Pair;
 
 /**
@@ -36,18 +39,22 @@ public interface IClientDevice extends Remote
 	 * @throws CommandFailedException
 	 * 
 	 */
-	public String executeShellCommand(String shellCommand) throws RemoteException;
+	public String executeShellCommand(String shellCommand) throws RemoteException, CommandFailedException;
 
 	/**
 	 * Sends sequence of shell commands to be executed on the testing device.
 	 * 
 	 * @param commands
 	 *        - List of the commands to be executed
+	 * @return
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws CommandFailedException
 	 */
-	public void executeSequenceOfShellCommands(List<String> commands) throws RemoteException;
+	public List<String> executeSequenceOfShellCommands(List<String> commands)
+		throws RemoteException,
+			CommandFailedException;
 
 	/**
 	 * Prepares the testing device for future installation of the tested application.
@@ -55,8 +62,9 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws IOException
 	 */
-	public void initApkInstall() throws RemoteException;
+	public void initApkInstall() throws RemoteException, IOException;
 
 	/**
 	 * Receives packet of bytes from the testing application's installation file and appends them to the .apk on the
@@ -67,8 +75,9 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws IOException
 	 */
-	public void appendToApk(Byte[] bytes) throws RemoteException;
+	public void appendToApk(byte[] bytes) throws RemoteException, IOException;
 
 	/**
 	 * Gets together all pieces of byte packages in one .apk file and installs it to the current device.
@@ -76,8 +85,10 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws CommandFailedException
+	 * @throws IOException
 	 */
-	public void buildAndInstallApk() throws RemoteException;
+	public void buildAndInstallApk() throws RemoteException, IOException, CommandFailedException;
 
 	/**
 	 * Removes all traces from installation file from the testing device.
@@ -85,8 +96,9 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws IOException
 	 */
-	public void discardApk() throws RemoteException;
+	public void discardApk() throws RemoteException, IOException;
 
 	/**
 	 * Returns String, which holds all screen widget's properties.
@@ -95,8 +107,9 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws CommandFailedException
 	 */
-	public String getUiXml() throws RemoteException;
+	public String getUiXml() throws RemoteException, CommandFailedException;
 
 	/**
 	 * Gets screenshot of testing device's screen.
@@ -106,7 +119,7 @@ public interface IClientDevice extends Remote
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 */
-	public Byte[] getScreenShot() throws RemoteException;
+	public Byte[] getScreenshot() throws RemoteException;
 
 	/**
 	 * Sets network upload and download speeds on device. Measure unit is KB.
@@ -170,8 +183,9 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws CommandFailedException
 	 */
-	public int getBatteryLevel() throws RemoteException;
+	public int getBatteryLevel() throws RemoteException, CommandFailedException;
 
 	/**
 	 * Sets the battery state.
