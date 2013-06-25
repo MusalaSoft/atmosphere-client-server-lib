@@ -13,12 +13,17 @@ public enum DeviceOs
 	/**
 	 * <i><b>Android 4.1</b></i>
 	 */
-	JELLY_BEAN("jelly_bean"),
+	JELLY_BEAN_4_1("4.1"),
 
 	/**
-	 * <i><b>Android 4.2</b></i>
+	 * <i><b>Android 4.2.1</b></i>
 	 */
-	JELLY_BEAN_MR1("jelly_bean_mr1"),
+	JELLY_BEAN_MR1_4_2_1("4.2.1"),
+
+	/**
+	 * <i><b>Android 4.2.2</b></i>
+	 */
+	JELLY_BEAN_MR1_4_2_2("4.2.2"),
 
 	/**
 	 * It means <i>"any available OS"</i>. OS by default when constructing new device.

@@ -3,7 +3,7 @@ package com.musala.atmosphere.commons.cs.clientbuilder;
 import java.io.Serializable;
 
 /**
- * Holds the parameters, needed to construct new device. If the current parameter is no needed it is set by default to
+ * Holds the parameters, needed to construct new device. If the current parameter is not needed it is set by default to
  * "No preference".
  * 
  * @author vladimir.vladimirov
@@ -49,7 +49,7 @@ public class DeviceParameters implements Serializable
 	private int ram;
 
 	/**
-	 * Constructor by default.
+	 * Constructor that sets all properties to their default (no preference) values.
 	 */
 	public DeviceParameters()
 	{
@@ -62,9 +62,9 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Gets the type of device.
+	 * Returns the set wanted device type.
 	 * 
-	 * @return - {@link EmulatorSelectionOptions EmulatorSelectionOptions }
+	 * @return - {@link DeviceType DeviceType}
 	 */
 	public DeviceType getDeviceType()
 	{
@@ -72,10 +72,10 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Sets the device type - emulator, real device or no preference.
+	 * Sets the wanted device type - emulator, real device or no preference.
 	 * 
-	 * @param emulator
-	 *        - {@link EmulatorSelectionOptions EmulatorSelectionOptions }
+	 * @param deviceType
+	 *        - {@link DeviceType DeviceType}
 	 */
 	public void setDeviceType(DeviceType deviceType)
 	{
@@ -83,7 +83,7 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Return the type of OS on the testing device.
+	 * Returns the set wanted OS on the testing device.
 	 * 
 	 * @return - {@link DeviceOs DeviceOs}
 	 */
@@ -93,7 +93,7 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Sets the OS of the testing device.
+	 * Sets the wanted OS of the testing device.
 	 * 
 	 * @param os
 	 *        - {@link DeviceOs DeviceOs}
@@ -104,9 +104,9 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Return the <i>height</i> of the testing device resolution.
+	 * Returns the set wanted <i>height</i> of the testing device screen resolution.
 	 * 
-	 * @return the resolution height
+	 * @return the screen resolution height.
 	 */
 	public int getResolutionHeight()
 	{
@@ -114,10 +114,10 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Sets the resolution height.
+	 * Sets the wanted screen resolution height.
 	 * 
 	 * @param resolutionHeight
-	 *        the resolution height to set
+	 *        the wanted screen resolution height.
 	 */
 	public void setResolutionHeight(int resolutionHeight)
 	{
@@ -125,7 +125,7 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Return the <i>width</i> of the testing device resolution.
+	 * Returns the set wanted <i>width</i> of the testing device screen resolution.
 	 * 
 	 * @return the resolution width
 	 */
@@ -135,10 +135,10 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Sets the resolution width.
+	 * Sets the wanted screen resolution width.
 	 * 
 	 * @param resolutionWidth
-	 *        - the resolution width to set
+	 *        - the wanted screen resolution width.
 	 */
 	public void setResolutionWidth(int resolutionWidth)
 	{
@@ -146,9 +146,9 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Return the <i>dpi</i> of the testing device's screen.
+	 * Returns the set wanted <i>dpi</i> of the testing device's screen.
 	 * 
-	 * @return the dpi
+	 * @return the screen dpi.
 	 */
 	public int getDpi()
 	{
@@ -156,10 +156,10 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Sets the screen dpi of the testing device.
+	 * Sets the wanted screen dpi of the testing device.
 	 * 
 	 * @param dpi
-	 *        the dpi to set
+	 *        the wanted screen dpi.
 	 */
 	public void setDpi(int dpi)
 	{
@@ -167,9 +167,9 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Return the <i>RAM</i> of the testing device.
+	 * Returns the set wanted <i>RAM</i> of the testing device.
 	 * 
-	 * @return the ram
+	 * @return the set wanted ram.
 	 */
 	public int getRam()
 	{
@@ -177,10 +177,10 @@ public class DeviceParameters implements Serializable
 	}
 
 	/**
-	 * Sets the RAM of the testing device.
+	 * Sets the wanted RAM amount of the testing device.
 	 * 
 	 * @param ram
-	 *        the ram to set
+	 *        the wanted device ram amount.
 	 */
 	public void setRam(int ram)
 	{
