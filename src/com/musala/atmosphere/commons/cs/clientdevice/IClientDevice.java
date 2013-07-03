@@ -118,8 +118,9 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws CommandFailedException
 	 */
-	public byte[] getScreenshot() throws RemoteException;
+	public byte[] getScreenshot() throws RemoteException, CommandFailedException;
 
 	/**
 	 * Sets network upload and download speeds on device. Measure unit is KB.
