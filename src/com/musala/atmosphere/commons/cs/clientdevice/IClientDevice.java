@@ -25,8 +25,9 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws CommandFailedException
 	 */
-	public int getFreeRam() throws RemoteException;
+	public long getFreeRam() throws RemoteException, CommandFailedException;
 
 	/**
 	 * Sends shell-command formated instruction to the Server for execution on testing device.
