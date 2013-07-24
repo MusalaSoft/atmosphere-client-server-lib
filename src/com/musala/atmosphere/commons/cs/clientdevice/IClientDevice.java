@@ -131,8 +131,9 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws CommandFailedException
 	 */
-	public void setNetworkSpeed(Pair<Integer, Integer> speeds) throws RemoteException;
+	public void setNetworkSpeed(Pair<Integer, Integer> speeds) throws RemoteException, CommandFailedException;
 
 	/**
 	 * Gets network speed of testing device as a pair of Integers. Measure unit is KB.
@@ -175,8 +176,9 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws CommandFailedException
 	 */
-	public void setBatteryLevel(int level) throws RemoteException;
+	public void setBatteryLevel(int level) throws RemoteException, CommandFailedException;
 
 	/**
 	 * Gets battery level of the testing device.
@@ -198,7 +200,7 @@ public interface IClientDevice extends Remote
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 */
-	public void setBatteryState(BatteryState state) throws RemoteException;
+	public void setBatteryState(BatteryState state) throws RemoteException, CommandFailedException;
 
 	/**
 	 * Gets battery state of testing device.
@@ -207,6 +209,26 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws CommandFailedException
 	 */
-	public BatteryState getBatteryState() throws RemoteException;
+	public BatteryState getBatteryState() throws RemoteException, CommandFailedException;
+
+	/**
+	 * Gets the power state of the testing device.
+	 * 
+	 * @return True if connected, false if disconnected.
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public boolean getPowerState() throws RemoteException, CommandFailedException;
+
+	/**
+	 * Sets the power state of the testing device.
+	 * 
+	 * @param state
+	 *        True if connected, false if disconnected.
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public void setPowerState(boolean state) throws CommandFailedException, RemoteException;
 }
