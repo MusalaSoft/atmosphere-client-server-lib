@@ -231,4 +231,16 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 */
 	public void setPowerState(boolean state) throws CommandFailedException, RemoteException;
+	
+	/**
+	 * Sets the airplane mode of the testing device.
+	 * 
+	 * @param airplaneMode
+	 *        True if in airplane mode, false if not.
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public void setAirplaneMode(boolean airplaneMode)
+			throws CommandFailedException,
+			RemoteException;
 }
