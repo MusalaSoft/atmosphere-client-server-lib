@@ -27,4 +27,11 @@ public interface IClientBuilder extends Remote
 	 */
 	public String getDeviceProxyRmiId(DeviceParameters deviceParameters) throws RemoteException;
 
+	/**
+	 * Releases allocated device from a Client and returns it in the pool.
+	 * 
+	 * @param rmiId
+	 *        - RMI string identifier for the device.
+	 */
+	public void releaseDevice(String rmiId) throws RemoteException;
 }

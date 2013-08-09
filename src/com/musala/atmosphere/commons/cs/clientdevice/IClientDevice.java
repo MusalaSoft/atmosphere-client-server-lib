@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.musala.atmosphere.commons.BatteryState;
 import com.musala.atmosphere.commons.CommandFailedException;
+import com.musala.atmosphere.commons.DeviceInformation;
 import com.musala.atmosphere.commons.DeviceOrientation;
 import com.musala.atmosphere.commons.Pair;
 
@@ -242,6 +243,14 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 */
 	public void setAirplaneMode(boolean airplaneMode) throws CommandFailedException, RemoteException;
+
+	/**
+	 * Gets the container with information for the testing device.
+	 * 
+	 * @return a {@link DeviceInformation DeviceInformation} structure about the tesing device.
+	 * @throws RemoteException
+	 */
+	public DeviceInformation getDeviceInformation() throws RemoteException;
 
 	/**
 	 * Sets new orientation of the testing device. Can only be applied on emulators.
