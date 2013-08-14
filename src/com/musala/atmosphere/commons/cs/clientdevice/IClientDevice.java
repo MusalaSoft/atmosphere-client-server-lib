@@ -10,6 +10,7 @@ import com.musala.atmosphere.commons.CommandFailedException;
 import com.musala.atmosphere.commons.DeviceInformation;
 import com.musala.atmosphere.commons.DeviceOrientation;
 import com.musala.atmosphere.commons.Pair;
+import com.musala.atmosphere.commons.cs.InvalidPasskeyException;
 
 /**
  * Common interface for the user's actions. Used in the RMI connection between Client and Server.
@@ -23,51 +24,70 @@ public interface IClientDevice extends Remote
 	/**
 	 * Gets the amount of usable RAM of the user's device.
 	 * 
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return int - usable RAM on testing device in MB
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws CommandFailedException
+	 * @throws InvalidPasskeyException
 	 */
-	public long getFreeRam() throws RemoteException, CommandFailedException;
+	public long getFreeRam(long invocationPasskey)
+		throws RemoteException,
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Sends shell-command formated instruction to the Server for execution on testing device.
 	 * 
 	 * @param shellCommand
 	 *        Executable shell command as a String.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws CommandFailedException
+	 * @throws InvalidPasskeyException
 	 * 
 	 */
-	public String executeShellCommand(String shellCommand) throws RemoteException, CommandFailedException;
+	public String executeShellCommand(String shellCommand, long invocationPasskey)
+		throws RemoteException,
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Sends sequence of shell commands to be executed on the testing device.
 	 * 
 	 * @param commands
 	 *        - List of the commands to be executed
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws CommandFailedException
+	 * @throws InvalidPasskeyException
 	 */
-	public List<String> executeSequenceOfShellCommands(List<String> commands)
+	public List<String> executeSequenceOfShellCommands(List<String> commands, long invocationPasskey)
 		throws RemoteException,
-			CommandFailedException;
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Prepares the testing device for future installation of the tested application.
 	 * 
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws IOException
+	 * @throws InvalidPasskeyException
 	 */
-	public void initApkInstall() throws RemoteException, IOException;
+	public void initApkInstall(long invocationPasskey) throws RemoteException, IOException, InvalidPasskeyException;
 
 	/**
 	 * Receives packet of bytes from the testing application's installation file and appends them to the .apk on the
@@ -75,190 +95,288 @@ public interface IClientDevice extends Remote
 	 * 
 	 * @param bytes
 	 *        - next portion of bytes of the apk file to be transported to the device
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws IOException
+	 * @throws InvalidPasskeyException
 	 */
-	public void appendToApk(byte[] bytes) throws RemoteException, IOException;
+	public void appendToApk(byte[] bytes, long invocationPasskey)
+		throws RemoteException,
+			IOException,
+			InvalidPasskeyException;
 
 	/**
 	 * Gets together all pieces of byte packages in one .apk file and installs it to the current device.
 	 * 
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws CommandFailedException
 	 * @throws IOException
+	 * @throws InvalidPasskeyException
 	 */
-	public void buildAndInstallApk() throws RemoteException, IOException, CommandFailedException;
+	public void buildAndInstallApk(long invocationPasskey)
+		throws RemoteException,
+			IOException,
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Removes all traces from installation file from the testing device.
 	 * 
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
-	 * @throws IOException
+	 * @throws InvalidPasskeyException
 	 */
-	public void discardApk() throws RemoteException, IOException;
+	public void discardApk(long invocationPasskey) throws RemoteException, InvalidPasskeyException;
 
 	/**
 	 * Returns String, which holds all screen widget's properties.
 	 * 
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return XML of the screen's structure formated as a String
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws CommandFailedException
+	 * @throws InvalidPasskeyException
 	 */
-	public String getUiXml() throws RemoteException, CommandFailedException;
+	public String getUiXml(long invocationPasskey)
+		throws RemoteException,
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Gets screenshot of testing device's screen.
 	 * 
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return - screenshot image as byte array
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws CommandFailedException
+	 * @throws InvalidPasskeyException
 	 */
-	public byte[] getScreenshot() throws RemoteException, CommandFailedException;
+	public byte[] getScreenshot(long invocationPasskey)
+		throws RemoteException,
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Sets network upload and download speeds on device. Measure unit is KB.
 	 * 
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @param speeds
 	 *        - pair of type < uploadSpeed, downloadSpeed >
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws CommandFailedException
+	 * @throws InvalidPasskeyException
 	 */
-	public void setNetworkSpeed(Pair<Integer, Integer> speeds) throws RemoteException, CommandFailedException;
+	public void setNetworkSpeed(Pair<Integer, Integer> speeds, long invocationPasskey)
+		throws RemoteException,
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Gets network speed of testing device as a pair of Integers. Measure unit is KB.
 	 * 
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return - pair of type < uploadSpeed, downloadSpeed >
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws InvalidPasskeyException
 	 */
-	public Pair<Integer, Integer> getNetworkSpeed() throws RemoteException;
+	public Pair<Integer, Integer> getNetworkSpeed(long invocationPasskey)
+		throws RemoteException,
+			InvalidPasskeyException;
 
 	/**
 	 * Sets the latency of the network on testing device. Network latency is simply defined as the time delay observed
 	 * as data transmits from one point on the network to another point on the same network.
 	 * 
 	 * @param latency
-	 *        - latency value in ms ( milliseconds )
+	 *        - latency value in milliseconds.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws InvalidPasskeyException
 	 */
-	public void setNetworkLatency(int latency) throws RemoteException;
+	public void setNetworkLatency(int latency, long invocationPasskey) throws RemoteException, InvalidPasskeyException;
 
 	/**
 	 * Gets latency of the network on the testing device. Network latency is simply defined as the time delay observed
 	 * as data transmits from one point on the network to another point on the same network.
 	 * 
-	 * @return - latency value in ms ( milliseconds )
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @return - latency value in milliseconds.
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws InvalidPasskeyException
 	 */
-	public int getNetworkLatency() throws RemoteException;
+	public int getNetworkLatency(long invocationPasskey) throws RemoteException, InvalidPasskeyException;
 
 	/**
 	 * Sets the level of the battery.
 	 * 
 	 * @param level
-	 *        - the level of battery in %
+	 *        - the level of battery in percent.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws CommandFailedException
+	 * @throws InvalidPasskeyException
 	 */
-	public void setBatteryLevel(int level) throws RemoteException, CommandFailedException;
+	public void setBatteryLevel(int level, long invocationPasskey)
+		throws RemoteException,
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Gets battery level of the testing device.
 	 * 
-	 * @return int - percent of battery level in range [0;100]
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @return int - battery level percentage.
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws CommandFailedException
+	 * @throws InvalidPasskeyException
 	 */
-	public int getBatteryLevel() throws RemoteException, CommandFailedException;
+	public int getBatteryLevel(long invocationPasskey)
+		throws RemoteException,
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Sets the battery state.
 	 * 
 	 * @param state
-	 *        - charging, not charging, discharging, unknown or full
+	 *        - a {@link BatteryState BatteryState} enum value.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
+	 * @throws InvalidPasskeyException
 	 */
-	public void setBatteryState(BatteryState state) throws RemoteException, CommandFailedException;
+	public void setBatteryState(BatteryState state, long invocationPasskey)
+		throws RemoteException,
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Gets battery state of testing device.
 	 * 
-	 * @return {@link BatteryState BatteryState}
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @return {@link BatteryState BatteryState} enum value.
 	 * @throws RemoteException
 	 *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
 	 *         connection, missing method or something else.
 	 * @throws CommandFailedException
+	 * @throws InvalidPasskeyException
 	 */
-	public BatteryState getBatteryState() throws RemoteException, CommandFailedException;
+	public BatteryState getBatteryState(long invocationPasskey)
+		throws RemoteException,
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Gets the power state of the testing device.
 	 * 
-	 * @return True if connected, false if disconnected.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @return True if connected, false otherwise.
 	 * @throws CommandFailedException
 	 * @throws RemoteException
+	 * @throws InvalidPasskeyException
 	 */
-	public boolean getPowerState() throws RemoteException, CommandFailedException;
+	public boolean getPowerState(long invocationPasskey)
+		throws RemoteException,
+			CommandFailedException,
+			InvalidPasskeyException;
 
 	/**
 	 * Sets the power state of the testing device.
 	 * 
 	 * @param state
-	 *        True if connected, false if disconnected.
+	 *        - True if connected, false otherwise.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws CommandFailedException
 	 * @throws RemoteException
+	 * @throws InvalidPasskeyException
 	 */
-	public void setPowerState(boolean state) throws CommandFailedException, RemoteException;
+	public void setPowerState(boolean state, long invocationPasskey)
+		throws CommandFailedException,
+			RemoteException,
+			InvalidPasskeyException;
 
 	/**
 	 * Sets the airplane mode of the testing device.
 	 * 
 	 * @param airplaneMode
-	 *        True if in airplane mode, false if not.
+	 *        - True if in airplane mode, false otherwise.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws CommandFailedException
 	 * @throws RemoteException
+	 * @throws InvalidPasskeyException
 	 */
-	public void setAirplaneMode(boolean airplaneMode) throws CommandFailedException, RemoteException;
+	public void setAirplaneMode(boolean airplaneMode, long invocationPasskey)
+		throws CommandFailedException,
+			RemoteException,
+			InvalidPasskeyException;
 
 	/**
 	 * Gets the container with information for the testing device.
 	 * 
-	 * @return a {@link DeviceInformation DeviceInformation} structure about the tesing device.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @return a {@link DeviceInformation DeviceInformation} structure containing information about the current device.
 	 * @throws RemoteException
+	 * @throws InvalidPasskeyException
 	 */
-	public DeviceInformation getDeviceInformation() throws RemoteException;
+	public DeviceInformation getDeviceInformation(long invocationPasskey)
+		throws RemoteException,
+			InvalidPasskeyException;
 
 	/**
 	 * Sets new orientation of the testing device. Can only be applied on emulators.
 	 * 
 	 * @param deviceOrientation
-	 *        - new device orientation to be set
+	 *        - a @link {@link DeviceOrientation DeviceOrientation} enum element that describes the new device
+	 *        orientation to be set.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
 	 * @throws CommandFailedException
+	 * @throws InvalidPasskeyException
 	 */
-	public void setOrientation(DeviceOrientation deviceOrientation) throws CommandFailedException, RemoteException;
+	public void setOrientation(DeviceOrientation deviceOrientation, long invocationPasskey)
+		throws CommandFailedException,
+			RemoteException,
+			InvalidPasskeyException;
 }
