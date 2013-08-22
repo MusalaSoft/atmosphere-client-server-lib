@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.musala.atmosphere.commons.BatteryState;
 import com.musala.atmosphere.commons.CommandFailedException;
+import com.musala.atmosphere.commons.DeviceAcceleration;
 import com.musala.atmosphere.commons.DeviceInformation;
 import com.musala.atmosphere.commons.DeviceOrientation;
 import com.musala.atmosphere.commons.Pair;
@@ -367,8 +368,8 @@ public interface IClientDevice extends Remote
 	 * Sets new orientation of the testing device. Can only be applied on emulators.
 	 * 
 	 * @param deviceOrientation
-	 *        - a @link {@link DeviceOrientation DeviceOrientation} enum element that describes the new device
-	 *        orientation to be set.
+	 *        - a @link {@link DeviceOrientation DeviceOrientation} object that describes the new device orientation to
+	 *        be set.
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
@@ -376,6 +377,23 @@ public interface IClientDevice extends Remote
 	 * @throws InvalidPasskeyException
 	 */
 	public void setOrientation(DeviceOrientation deviceOrientation, long invocationPasskey)
+		throws CommandFailedException,
+			RemoteException,
+			InvalidPasskeyException;
+
+	/**
+	 * Sets new acceleration for the testing device. Can only be applied on emulators.
+	 * 
+	 * @param deviceAcceleration
+	 *        - a @link {@link DeviceAcceleration DeviceAcceleration} object that describes the new device acceleration
+	 *        to be set.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @throws RemoteException
+	 * @throws CommandFailedException
+	 * @throws InvalidPasskeyException
+	 */
+	public void setAcceleration(DeviceAcceleration deviceAcceleration, long invocationPasskey)
 		throws CommandFailedException,
 			RemoteException,
 			InvalidPasskeyException;
