@@ -376,10 +376,25 @@ public interface IClientDevice extends Remote
 	 * @throws CommandFailedException
 	 * @throws InvalidPasskeyException
 	 */
-	public void setOrientation(DeviceOrientation deviceOrientation, long invocationPasskey)
+	public void setDeviceOrientation(DeviceOrientation deviceOrientation, long invocationPasskey)
 		throws CommandFailedException,
 			RemoteException,
 			InvalidPasskeyException;
+
+	/**
+	 * Gets the device orientation of the device. The orientation sensor on the device must be active.
+	 * 
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @return a DeviceOrientation instance.
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public DeviceOrientation getDeviceOrientation(long invocationPasskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
 
 	/**
 	 * Sets new acceleration for the testing device. Can only be applied on emulators.
