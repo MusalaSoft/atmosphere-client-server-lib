@@ -412,4 +412,19 @@ public interface IClientDevice extends Remote
 		throws CommandFailedException,
 			RemoteException,
 			InvalidPasskeyException;
+
+	/**
+	 * Gets the device acceleration of the device. The accelerometer on the device must be active.
+	 * 
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @return a DeviceAcceleration instance.
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public DeviceAcceleration getDeviceAcceleration(long invocationPasskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
 }
