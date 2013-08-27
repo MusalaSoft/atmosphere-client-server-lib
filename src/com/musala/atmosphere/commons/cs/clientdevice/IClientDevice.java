@@ -11,6 +11,7 @@ import com.musala.atmosphere.commons.DeviceAcceleration;
 import com.musala.atmosphere.commons.DeviceInformation;
 import com.musala.atmosphere.commons.DeviceOrientation;
 import com.musala.atmosphere.commons.Pair;
+import com.musala.atmosphere.commons.ScreenOrientation;
 import com.musala.atmosphere.commons.cs.InvalidPasskeyException;
 
 /**
@@ -395,6 +396,36 @@ public interface IClientDevice extends Remote
 		throws InvalidPasskeyException,
 			CommandFailedException,
 			RemoteException;
+
+	/**
+	 * Sets new screen orientation of the device.
+	 * 
+	 * @param screenOrientation
+	 *        - a @link {@link ScreenOrientation ScreenOrientation} enum element that describes the screen orientation
+	 *        to be set.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @throws RemoteException
+	 * @throws InvalidPasskeyException
+	 */
+	public void setScreenOrientation(ScreenOrientation screenOrientation, long invocationPasskey)
+		throws RemoteException,
+			InvalidPasskeyException;
+
+	/**
+	 * Control whether the accelerometer will be used to change screen orientation
+	 * 
+	 * @param autoRotation
+	 *        - if false, it will not be used unless explicitly requested by the application; if true, it will be used
+	 *        by default unless explicitly disabled by the application.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @throws RemoteException
+	 * @throws InvalidPasskeyException
+	 */
+	public void setAutoRotation(boolean autoRotation, long invocationPasskey)
+		throws RemoteException,
+			InvalidPasskeyException;
 
 	/**
 	 * Sets new acceleration for the testing device. Can only be applied on emulators.
