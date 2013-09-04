@@ -33,6 +33,10 @@ public class DeviceParameters implements Serializable
 
 	public static final int RAM_NO_PREFERENCE = -1;
 
+	public static final String SERIALNUMBER_NO_PREFERENCE = "not set";
+
+	public static final String MODEL_NO_PREFERENCE = "not set";
+
 	/**
 	 * DeviceParameters data members.
 	 */
@@ -48,6 +52,10 @@ public class DeviceParameters implements Serializable
 
 	private int ram;
 
+	private String serialNumber;
+
+	private String model;
+
 	/**
 	 * Constructor that sets all properties to their default (no preference) values.
 	 */
@@ -59,6 +67,8 @@ public class DeviceParameters implements Serializable
 		resolutionWidth = RESOLUTION_WIDTH_NO_PREFERENCE;
 		dpi = DPI_NO_PREFERENCE;
 		ram = RAM_NO_PREFERENCE;
+		serialNumber = SERIALNUMBER_NO_PREFERENCE;
+		model = MODEL_NO_PREFERENCE;
 	}
 
 	/**
@@ -101,6 +111,48 @@ public class DeviceParameters implements Serializable
 	public void setOs(DeviceOs os)
 	{
 		this.deviceOs = os;
+	}
+
+	/**
+	 * Returns the set wanted device serial number.
+	 * 
+	 * @return
+	 */
+	public String getSerialNumber()
+	{
+		return serialNumber;
+	}
+
+	/**
+	 * Sets the wanted device serial number.
+	 * 
+	 * @param serialNumber
+	 *        - the wanted serial number.
+	 */
+	public void setSerialNumber(String serialNumber)
+	{
+		this.serialNumber = serialNumber;
+	}
+
+	/**
+	 * Returns the set wanted device model.
+	 * 
+	 * @return
+	 */
+	public String getModel()
+	{
+		return model;
+	}
+
+	/**
+	 * Sets the wanted device model.
+	 * 
+	 * @param model
+	 *        - the wanted model.
+	 */
+	public void setModel(String model)
+	{
+		this.model = model;
 	}
 
 	/**
