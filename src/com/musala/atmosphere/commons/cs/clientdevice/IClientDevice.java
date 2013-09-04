@@ -7,9 +7,11 @@ import java.util.List;
 
 import com.musala.atmosphere.commons.BatteryState;
 import com.musala.atmosphere.commons.CommandFailedException;
+import com.musala.atmosphere.commons.ConnectionType;
 import com.musala.atmosphere.commons.DeviceAcceleration;
 import com.musala.atmosphere.commons.DeviceInformation;
 import com.musala.atmosphere.commons.DeviceOrientation;
+import com.musala.atmosphere.commons.MobileDataState;
 import com.musala.atmosphere.commons.Pair;
 import com.musala.atmosphere.commons.ScreenOrientation;
 import com.musala.atmosphere.commons.cs.InvalidPasskeyException;
@@ -455,6 +457,53 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 */
 	public DeviceAcceleration getDeviceAcceleration(long invocationPasskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
+
+	/**
+	 * Sets the mobile data state of an emuslator.
+	 * 
+	 * @param state
+	 *        - a member of the {@link MobileDataState} enum.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public void setMobileDataState(MobileDataState state, long invocationPasskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
+
+	/**
+	 * Gets the mobile data state of an emulator.
+	 * 
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * @return a member of the {@link MobileDataState} enum.
+	 * @throws InvalidPasskeyException
+	 * @throws RemoteException
+	 */
+	public ConnectionType getConnectionType(long invocationPasskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
+
+	/**
+	 * Gets the mobile data state of an emulator.
+	 * 
+	 * @param state
+	 *        - a member of the {@link MobileDataState} enum.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * 
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public MobileDataState getMobileDataState(long invocationPasskey)
 		throws InvalidPasskeyException,
 			CommandFailedException,
 			RemoteException;
