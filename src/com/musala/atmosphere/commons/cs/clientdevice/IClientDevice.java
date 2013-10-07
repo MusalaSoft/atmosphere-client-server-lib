@@ -25,13 +25,6 @@ import com.musala.atmosphere.commons.util.Pair;
 public interface IClientDevice extends Remote
 {
 	/**
-	 * Validates whether a communication to the ATMOSPHERE service is available.
-	 * 
-	 * @return - true if communication is available; false otherwise.
-	 */
-	public boolean validateServiceCommunication(long invocationPasskey) throws RemoteException, InvalidPasskeyException;
-
-	/**
 	 * Gets the amount of usable RAM of the user's device.
 	 * 
 	 * @param invocationPasskey
