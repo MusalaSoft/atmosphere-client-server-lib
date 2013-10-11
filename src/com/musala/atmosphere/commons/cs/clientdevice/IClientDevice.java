@@ -460,4 +460,21 @@ public interface IClientDevice extends Remote
 		throws InvalidPasskeyException,
 			CommandFailedException,
 			RemoteException;
+
+	/**
+	 * Sets the WiFi state on the testing device.
+	 * 
+	 * @param state
+	 *        - true if the WiFi should be on; false if it should be off.
+	 * @param invocationPasskey
+	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
+	 * 
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public void setWiFi(boolean state, long invocationPaskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
 }
