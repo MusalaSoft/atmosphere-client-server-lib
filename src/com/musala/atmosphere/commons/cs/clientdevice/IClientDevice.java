@@ -12,6 +12,7 @@ import com.musala.atmosphere.commons.DeviceAcceleration;
 import com.musala.atmosphere.commons.DeviceInformation;
 import com.musala.atmosphere.commons.DeviceOrientation;
 import com.musala.atmosphere.commons.MobileDataState;
+import com.musala.atmosphere.commons.SmsMessage;
 import com.musala.atmosphere.commons.cs.InvalidPasskeyException;
 import com.musala.atmosphere.commons.util.Pair;
 
@@ -474,6 +475,21 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 */
 	public void setWiFi(boolean state, long invocationPaskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
+
+	/**
+	 * Sends SMS to the testing device.
+	 * 
+	 * @param smsMessage
+	 *        - message, that will be sent to the device
+	 * 
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public void receiveSms(SmsMessage smsMessage, long invocationPasskey)
 		throws InvalidPasskeyException,
 			CommandFailedException,
 			RemoteException;
