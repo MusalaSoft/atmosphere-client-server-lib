@@ -1,6 +1,7 @@
 package com.musala.atmosphere.commons.cs.clientdevice;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -12,6 +13,7 @@ import com.musala.atmosphere.commons.DeviceAcceleration;
 import com.musala.atmosphere.commons.DeviceInformation;
 import com.musala.atmosphere.commons.DeviceOrientation;
 import com.musala.atmosphere.commons.MobileDataState;
+import com.musala.atmosphere.commons.PhoneNumber;
 import com.musala.atmosphere.commons.SmsMessage;
 import com.musala.atmosphere.commons.cs.InvalidPasskeyException;
 import com.musala.atmosphere.commons.util.Pair;
@@ -490,6 +492,66 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 */
 	public void receiveSms(SmsMessage smsMessage, long invocationPasskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
+
+	/**
+	 * Sends a call to the emulator.
+	 * 
+	 * @param phoneNumber
+	 *        - the phone number, that will call the emulator.
+	 * 
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public void receiveCall(PhoneNumber phoneNumber, long invocationPasskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
+
+	/**
+	 * Accepts a call to the emulator.
+	 * 
+	 * @param phoneNumber
+	 *        - the phone number, that calls the emulator.
+	 * 
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public void acceptCall(PhoneNumber phoneNumber, long invocationPasskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
+
+	/**
+	 * Holds a call to the emulator.
+	 * 
+	 * @param phoneNumber
+	 *        - the phone number, that calls the emulator.
+	 * 
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public void holdCall(PhoneNumber phoneNumber, long invocationPasskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
+
+	/**
+	 * Cancels a call to the emulator.
+	 * 
+	 * @param phoneNumber
+	 *        - the phone number, that calls the emulator.
+	 * 
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public void cancelCall(PhoneNumber phoneNumber, long invocationPasskey)
 		throws InvalidPasskeyException,
 			CommandFailedException,
 			RemoteException;
