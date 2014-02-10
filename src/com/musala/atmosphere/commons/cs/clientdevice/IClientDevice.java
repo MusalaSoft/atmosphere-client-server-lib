@@ -1,7 +1,6 @@
 package com.musala.atmosphere.commons.cs.clientdevice;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -16,6 +15,7 @@ import com.musala.atmosphere.commons.MobileDataState;
 import com.musala.atmosphere.commons.PhoneNumber;
 import com.musala.atmosphere.commons.SmsMessage;
 import com.musala.atmosphere.commons.cs.InvalidPasskeyException;
+import com.musala.atmosphere.commons.gesture.Gesture;
 import com.musala.atmosphere.commons.util.Pair;
 
 /**
@@ -492,6 +492,21 @@ public interface IClientDevice extends Remote
 	 * @throws RemoteException
 	 */
 	public void receiveSms(SmsMessage smsMessage, long invocationPasskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
+
+	/**
+	 * Executes a predefined gesture on the current device.
+	 * 
+	 * @param gesture
+	 *        - the gesture to be executed.
+	 * 
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	void executeGesture(Gesture gesture, long invocationPasskey)
 		throws InvalidPasskeyException,
 			CommandFailedException,
 			RemoteException;
