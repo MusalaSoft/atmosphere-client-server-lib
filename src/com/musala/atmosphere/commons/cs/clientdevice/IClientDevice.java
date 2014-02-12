@@ -8,6 +8,7 @@ import java.util.List;
 import com.musala.atmosphere.commons.ConnectionType;
 import com.musala.atmosphere.commons.DeviceInformation;
 import com.musala.atmosphere.commons.SmsMessage;
+import com.musala.atmosphere.commons.TelephonyInformation;
 import com.musala.atmosphere.commons.beans.BatteryState;
 import com.musala.atmosphere.commons.beans.DeviceAcceleration;
 import com.musala.atmosphere.commons.beans.DeviceOrientation;
@@ -20,16 +21,16 @@ import com.musala.atmosphere.commons.util.Pair;
 
 /**
  * Common interface for the user's actions. Used in the RMI connection between Client and Server.
- *
+ * 
  * @author vladimir.vladimirov
- *
+ * 
  */
 
 public interface IClientDevice extends Remote
 {
 	/**
 	 * Gets the amount of usable RAM of the user's device.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return int - usable RAM on testing device in MB
@@ -46,7 +47,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sends shell-command formated instruction to the Server for execution on testing device.
-	 *
+	 * 
 	 * @param shellCommand
 	 *        Executable shell command as a String.
 	 * @param invocationPasskey
@@ -56,7 +57,7 @@ public interface IClientDevice extends Remote
 	 *         connection, missing method or something else.
 	 * @throws CommandFailedException
 	 * @throws InvalidPasskeyException
-	 *
+	 * 
 	 */
 	public String executeShellCommand(String shellCommand, long invocationPasskey)
 		throws RemoteException,
@@ -65,7 +66,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sends sequence of shell commands to be executed on the testing device.
-	 *
+	 * 
 	 * @param commands
 	 *        - List of the commands to be executed
 	 * @param invocationPasskey
@@ -84,7 +85,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Prepares the testing device for future installation of the tested application.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
@@ -98,7 +99,7 @@ public interface IClientDevice extends Remote
 	/**
 	 * Receives packet of bytes from the testing application's installation file and appends them to the .apk on the
 	 * testing device's side.
-	 *
+	 * 
 	 * @param bytes
 	 *        - next portion of bytes of the apk file to be transported to the device
 	 * @param invocationPasskey
@@ -116,7 +117,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Gets together all pieces of byte packages in one .apk file and installs it to the current device.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
@@ -134,7 +135,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Removes all traces from installation file from the testing device.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @throws RemoteException
@@ -146,7 +147,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Returns String, which holds all screen widget's properties.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return XML of the screen's structure formated as a String
@@ -163,7 +164,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Gets screenshot of testing device's screen.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return - screenshot image as byte array
@@ -180,7 +181,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sets network upload and download speeds on device. Measure unit is KB.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @param speeds
@@ -198,7 +199,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Gets network speed of testing device as a pair of Integers. Measure unit is KB.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return - pair of type < uploadSpeed, downloadSpeed >
@@ -214,7 +215,7 @@ public interface IClientDevice extends Remote
 	/**
 	 * Sets the latency of the network on testing device. Network latency is simply defined as the time delay observed
 	 * as data transmits from one point on the network to another point on the same network.
-	 *
+	 * 
 	 * @param latency
 	 *        - latency value in milliseconds.
 	 * @param invocationPasskey
@@ -229,7 +230,7 @@ public interface IClientDevice extends Remote
 	/**
 	 * Gets latency of the network on the testing device. Network latency is simply defined as the time delay observed
 	 * as data transmits from one point on the network to another point on the same network.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return - latency value in milliseconds.
@@ -242,7 +243,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sets the level of the battery.
-	 *
+	 * 
 	 * @param level
 	 *        - the level of battery in percent.
 	 * @param invocationPasskey
@@ -260,7 +261,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Gets battery level of the testing device.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return int - battery level percentage.
@@ -277,7 +278,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sets the battery state.
-	 *
+	 * 
 	 * @param state
 	 *        - a {@link BatteryState BatteryState} enum value.
 	 * @param invocationPasskey
@@ -294,7 +295,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Gets battery state of testing device.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return {@link BatteryState BatteryState} enum value.
@@ -311,7 +312,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Gets the power state of the testing device.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return True if connected, false otherwise.
@@ -326,7 +327,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sets the power state of the testing device.
-	 *
+	 * 
 	 * @param state
 	 *        - True if connected, false otherwise.
 	 * @param invocationPasskey
@@ -342,7 +343,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Gets the container with information for the testing device.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return a {@link DeviceInformation DeviceInformation} structure containing information about the current device.
@@ -355,7 +356,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sets new orientation of the testing device. Can only be applied on emulators.
-	 *
+	 * 
 	 * @param deviceOrientation
 	 *        - a @link {@link DeviceOrientation DeviceOrientation} object that describes the new device orientation to
 	 *        be set.
@@ -372,7 +373,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Gets the device orientation of the device. The orientation sensor on the device must be active.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return a DeviceOrientation instance.
@@ -387,7 +388,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sets new acceleration for the testing device. Can only be applied on emulators.
-	 *
+	 * 
 	 * @param deviceAcceleration
 	 *        - a @link {@link DeviceAcceleration DeviceAcceleration} object that describes the new device acceleration
 	 *        to be set.
@@ -404,7 +405,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Gets the device acceleration of the device. The accelerometer on the device must be active.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return a DeviceAcceleration instance.
@@ -419,7 +420,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sets the mobile data state of an emuslator.
-	 *
+	 * 
 	 * @param state
 	 *        - a member of the {@link MobileDataState} enum.
 	 * @param invocationPasskey
@@ -435,7 +436,7 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Gets the mobile data state of an emulator.
-	 *
+	 * 
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
 	 * @return a member of the {@link MobileDataState} enum.
@@ -449,12 +450,12 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Gets the mobile data state of an emulator.
-	 *
+	 * 
 	 * @param state
 	 *        - a member of the {@link MobileDataState} enum.
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
-	 *
+	 * 
 	 * @throws InvalidPasskeyException
 	 * @throws CommandFailedException
 	 * @throws RemoteException
@@ -466,12 +467,12 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sets the WiFi state on the testing device.
-	 *
+	 * 
 	 * @param state
 	 *        - true if the WiFi should be on; false if it should be off.
 	 * @param invocationPasskey
 	 *        - the authorization passkey that validates this invocation is coming from a legitimate source.
-	 *
+	 * 
 	 * @throws InvalidPasskeyException
 	 * @throws CommandFailedException
 	 * @throws RemoteException
@@ -483,10 +484,10 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sends SMS to the testing device.
-	 *
+	 * 
 	 * @param smsMessage
 	 *        - message, that will be sent to the device
-	 *
+	 * 
 	 * @throws InvalidPasskeyException
 	 * @throws CommandFailedException
 	 * @throws RemoteException
@@ -498,10 +499,10 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Executes a predefined gesture on the current device.
-	 *
+	 * 
 	 * @param gesture
 	 *        - the gesture to be executed.
-	 *
+	 * 
 	 * @throws InvalidPasskeyException
 	 * @throws CommandFailedException
 	 * @throws RemoteException
@@ -513,10 +514,10 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Sends a call to the emulator.
-	 *
+	 * 
 	 * @param phoneNumber
 	 *        - the phone number, that will call the emulator.
-	 *
+	 * 
 	 * @throws InvalidPasskeyException
 	 * @throws CommandFailedException
 	 * @throws RemoteException
@@ -528,10 +529,10 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Accepts a call to the emulator.
-	 *
+	 * 
 	 * @param phoneNumber
 	 *        - the phone number, that calls the emulator.
-	 *
+	 * 
 	 * @throws InvalidPasskeyException
 	 * @throws CommandFailedException
 	 * @throws RemoteException
@@ -543,10 +544,10 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Holds a call to the emulator.
-	 *
+	 * 
 	 * @param phoneNumber
 	 *        - the phone number, that calls the emulator.
-	 *
+	 * 
 	 * @throws InvalidPasskeyException
 	 * @throws CommandFailedException
 	 * @throws RemoteException
@@ -558,15 +559,28 @@ public interface IClientDevice extends Remote
 
 	/**
 	 * Cancels a call to the emulator.
-	 *
+	 * 
 	 * @param phoneNumber
 	 *        - the phone number, that calls the emulator.
-	 *
+	 * 
 	 * @throws InvalidPasskeyException
 	 * @throws CommandFailedException
 	 * @throws RemoteException
 	 */
 	public void cancelCall(PhoneNumber phoneNumber, long invocationPasskey)
+		throws InvalidPasskeyException,
+			CommandFailedException,
+			RemoteException;
+
+	/**
+	 * Obtains information about the telephony services on the device.
+	 * 
+	 * @return {@link TelephonyInformation} instance.
+	 * @throws InvalidPasskeyException
+	 * @throws CommandFailedException
+	 * @throws RemoteException
+	 */
+	public TelephonyInformation getTelephonyInformation(long invocationPasskey)
 		throws InvalidPasskeyException,
 			CommandFailedException,
 			RemoteException;
