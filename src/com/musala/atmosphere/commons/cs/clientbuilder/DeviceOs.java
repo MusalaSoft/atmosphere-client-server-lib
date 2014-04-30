@@ -49,4 +49,21 @@ public enum DeviceOs {
         return value;
     }
 
+    public DeviceOs getDeviceOs(String os) {
+        switch (os) {
+            case "4.1":
+                return JELLY_BEAN_4_1;
+            case "4.2.1":
+                return JELLY_BEAN_MR1_4_2_1;
+            case "4.2.2":
+                return JELLY_BEAN_MR1_4_2_2;
+            case "4.3":
+                return JELLY_BEAN_MR2_4_3;
+            case "4.4":
+                return KITKAT_4_4;
+            default:
+                return NO_PREFERENCE;
+        }
+    }
+
 }
