@@ -2,6 +2,8 @@ package com.musala.atmosphere.commons.cs.clientbuilder;
 
 import java.io.Serializable;
 
+import org.apache.log4j.Logger;
+
 /**
  * Holds the parameters, needed to construct new device. If the current parameter is not needed it is set by default to
  * "No preference".
@@ -10,233 +12,246 @@ import java.io.Serializable;
  * 
  */
 
-public class DeviceParameters implements Serializable
-{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2882881882742875572L;
+public class DeviceParameters implements Serializable {
+    private static final long serialVersionUID = -2882881882742875572L;
 
-	/**
-	 * Default values for device properties.
-	 */
+    private static Logger LOGGER = Logger.getLogger(DeviceParameters.class.getCanonicalName());
 
-	public static final DeviceType DEVICE_TYPE_NO_PREFERENCE = DeviceType.NO_PREFERENCE;
+    /**
+     * Default values for device properties.
+     */
+    public static final DeviceType DEVICE_TYPE_NO_PREFERENCE = DeviceType.NO_PREFERENCE;
 
-	public static final DeviceOs DEVICE_OS_NO_PREFERENCE = DeviceOs.NO_PREFERENCE;
+    public static final DeviceOs DEVICE_OS_NO_PREFERENCE = DeviceOs.NO_PREFERENCE;
 
-	public static final int RESOLUTION_HEIGHT_NO_PREFERENCE = -1;
+    public static final int API_LEVEL_NO_PREFERENCE = DEVICE_OS_NO_PREFERENCE.getApiLevel();
 
-	public static final int RESOLUTION_WIDTH_NO_PREFERENCE = -1;
+    public static final int RESOLUTION_HEIGHT_NO_PREFERENCE = -1;
 
-	public static final int DPI_NO_PREFERENCE = -1;
+    public static final int RESOLUTION_WIDTH_NO_PREFERENCE = -1;
 
-	public static final int RAM_NO_PREFERENCE = -1;
+    public static final int DPI_NO_PREFERENCE = -1;
 
-	public static final String SERIALNUMBER_NO_PREFERENCE = "not set";
+    public static final int RAM_NO_PREFERENCE = -1;
 
-	public static final String MODEL_NO_PREFERENCE = "not set";
+    public static final String SERIALNUMBER_NO_PREFERENCE = "not set";
 
-	/**
-	 * DeviceParameters data members.
-	 */
-	private DeviceType deviceType;
+    public static final String MODEL_NO_PREFERENCE = "not set";
 
-	private DeviceOs deviceOs;
+    /**
+     * DeviceParameters data members.
+     */
+    private DeviceType deviceType;
 
-	private int resolutionHeight;
+    private DeviceOs deviceOs;
 
-	private int resolutionWidth;
+    private int apiLevel;
 
-	private int dpi;
+    private int resolutionHeight;
 
-	private int ram;
+    private int resolutionWidth;
 
-	private String serialNumber;
+    private int dpi;
 
-	private String model;
+    private int ram;
 
-	/**
-	 * Constructor that sets all properties to their default (no preference) values.
-	 */
-	public DeviceParameters()
-	{
-		deviceType = DEVICE_TYPE_NO_PREFERENCE;
-		deviceOs = DEVICE_OS_NO_PREFERENCE;
-		resolutionHeight = RESOLUTION_HEIGHT_NO_PREFERENCE;
-		resolutionWidth = RESOLUTION_WIDTH_NO_PREFERENCE;
-		dpi = DPI_NO_PREFERENCE;
-		ram = RAM_NO_PREFERENCE;
-		serialNumber = SERIALNUMBER_NO_PREFERENCE;
-		model = MODEL_NO_PREFERENCE;
-	}
+    private String serialNumber;
 
-	/**
-	 * Returns the set wanted device type.
-	 * 
-	 * @return - {@link DeviceType DeviceType}
-	 */
-	public DeviceType getDeviceType()
-	{
-		return deviceType;
-	}
+    private String model;
 
-	/**
-	 * Sets the wanted device type - emulator, real device or no preference.
-	 * 
-	 * @param deviceType
-	 *        - {@link DeviceType DeviceType}
-	 */
-	public void setDeviceType(DeviceType deviceType)
-	{
-		this.deviceType = deviceType;
-	}
+    /**
+     * Constructor that sets all properties to their default (no preference) values.
+     */
+    public DeviceParameters() {
+        deviceType = DEVICE_TYPE_NO_PREFERENCE;
+        deviceOs = DEVICE_OS_NO_PREFERENCE;
+        resolutionHeight = RESOLUTION_HEIGHT_NO_PREFERENCE;
+        resolutionWidth = RESOLUTION_WIDTH_NO_PREFERENCE;
+        dpi = DPI_NO_PREFERENCE;
+        ram = RAM_NO_PREFERENCE;
+        serialNumber = SERIALNUMBER_NO_PREFERENCE;
+        model = MODEL_NO_PREFERENCE;
+    }
 
-	/**
-	 * Returns the set wanted OS on the testing device.
-	 * 
-	 * @return - {@link DeviceOs DeviceOs}
-	 */
-	public DeviceOs getOs()
-	{
-		return deviceOs;
-	}
+    /**
+     * Returns the set wanted device type.
+     * 
+     * @return - {@link DeviceType DeviceType}
+     */
+    public DeviceType getDeviceType() {
+        return deviceType;
+    }
 
-	/**
-	 * Sets the wanted OS of the testing device.
-	 * 
-	 * @param os
-	 *        - {@link DeviceOs DeviceOs}
-	 */
-	public void setOs(DeviceOs os)
-	{
-		this.deviceOs = os;
-	}
+    /**
+     * Sets the wanted device type - emulator, real device or no preference.
+     * 
+     * @param deviceType
+     *        - {@link DeviceType DeviceType}
+     */
+    public void setDeviceType(DeviceType deviceType) {
+        this.deviceType = deviceType;
+    }
 
-	/**
-	 * Returns the set wanted device serial number.
-	 * 
-	 * @return
-	 */
-	public String getSerialNumber()
-	{
-		return serialNumber;
-	}
+    /**
+     * Returns the set wanted OS on the testing device.
+     * 
+     * @return - {@link DeviceOs DeviceOs}
+     */
+    public DeviceOs getOs() {
+        return deviceOs;
+    }
 
-	/**
-	 * Sets the wanted device serial number.
-	 * 
-	 * @param serialNumber
-	 *        - the wanted serial number.
-	 */
-	public void setSerialNumber(String serialNumber)
-	{
-		this.serialNumber = serialNumber;
-	}
+    /**
+     * Sets the wanted OS of the testing device.
+     * 
+     * @param os
+     *        - {@link DeviceOs DeviceOs}
+     */
+    public void setOs(DeviceOs os) {
+        if (apiLevel == API_LEVEL_NO_PREFERENCE) {
+            this.deviceOs = os;
+            return;
+        }
 
-	/**
-	 * Returns the set wanted device model.
-	 * 
-	 * @return
-	 */
-	public String getModel()
-	{
-		return model;
-	}
+        int osApiLevel = deviceOs.getApiLevel();
+        if (osApiLevel != apiLevel) {
+            apiLevel = osApiLevel;
+            String messageFormat = "Device OS and API level missmatch when trying to set the OS type. Device API level changed to %d.";
+            String message = String.format(messageFormat, osApiLevel);
+            LOGGER.warn(message);
+        }
+    }
 
-	/**
-	 * Sets the wanted device model.
-	 * 
-	 * @param model
-	 *        - the wanted model.
-	 */
-	public void setModel(String model)
-	{
-		this.model = model;
-	}
+    /**
+     * Returns the set wanted device serial number.
+     * 
+     * @return
+     */
+    public String getSerialNumber() {
+        return serialNumber;
+    }
 
-	/**
-	 * Returns the set wanted <i>height</i> of the testing device screen resolution.
-	 * 
-	 * @return the screen resolution height.
-	 */
-	public int getResolutionHeight()
-	{
-		return resolutionHeight;
-	}
+    /**
+     * Sets the wanted device serial number.
+     * 
+     * @param serialNumber
+     *        - the wanted serial number.
+     */
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
 
-	/**
-	 * Sets the wanted screen resolution height.
-	 * 
-	 * @param resolutionHeight
-	 *        the wanted screen resolution height.
-	 */
-	public void setResolutionHeight(int resolutionHeight)
-	{
-		this.resolutionHeight = resolutionHeight;
-	}
+    /**
+     * Returns the set wanted device model.
+     * 
+     * @return
+     */
+    public String getModel() {
+        return model;
+    }
 
-	/**
-	 * Returns the set wanted <i>width</i> of the testing device screen resolution.
-	 * 
-	 * @return the resolution width
-	 */
-	public int getResolutionWidth()
-	{
-		return resolutionWidth;
-	}
+    /**
+     * Sets the wanted device model.
+     * 
+     * @param model
+     *        - the wanted model.
+     */
+    public void setModel(String model) {
+        this.model = model;
+    }
 
-	/**
-	 * Sets the wanted screen resolution width.
-	 * 
-	 * @param resolutionWidth
-	 *        - the wanted screen resolution width.
-	 */
-	public void setResolutionWidth(int resolutionWidth)
-	{
-		this.resolutionWidth = resolutionWidth;
-	}
+    /**
+     * Returns the set wanted <i>height</i> of the testing device screen resolution.
+     * 
+     * @return the screen resolution height.
+     */
+    public int getResolutionHeight() {
+        return resolutionHeight;
+    }
 
-	/**
-	 * Returns the set wanted <i>dpi</i> of the testing device's screen.
-	 * 
-	 * @return the screen dpi.
-	 */
-	public int getDpi()
-	{
-		return dpi;
-	}
+    /**
+     * Sets the wanted screen resolution height.
+     * 
+     * @param resolutionHeight
+     *        the wanted screen resolution height.
+     */
+    public void setResolutionHeight(int resolutionHeight) {
+        this.resolutionHeight = resolutionHeight;
+    }
 
-	/**
-	 * Sets the wanted screen dpi of the testing device.
-	 * 
-	 * @param dpi
-	 *        the wanted screen dpi.
-	 */
-	public void setDpi(int dpi)
-	{
-		this.dpi = dpi;
-	}
+    /**
+     * Returns the set wanted <i>width</i> of the testing device screen resolution.
+     * 
+     * @return the resolution width
+     */
+    public int getResolutionWidth() {
+        return resolutionWidth;
+    }
 
-	/**
-	 * Returns the set wanted <i>RAM</i> of the testing device.
-	 * 
-	 * @return the set wanted ram.
-	 */
-	public int getRam()
-	{
-		return ram;
-	}
+    /**
+     * Sets the wanted screen resolution width.
+     * 
+     * @param resolutionWidth
+     *        - the wanted screen resolution width.
+     */
+    public void setResolutionWidth(int resolutionWidth) {
+        this.resolutionWidth = resolutionWidth;
+    }
 
-	/**
-	 * Sets the wanted RAM amount of the testing device.
-	 * 
-	 * @param ram
-	 *        the wanted device ram amount.
-	 */
-	public void setRam(int ram)
-	{
-		this.ram = ram;
-	}
+    /**
+     * Returns the set wanted <i>dpi</i> of the testing device's screen.
+     * 
+     * @return the screen dpi.
+     */
+    public int getDpi() {
+        return dpi;
+    }
 
+    /**
+     * Sets the wanted screen dpi of the testing device.
+     * 
+     * @param dpi
+     *        the wanted screen dpi.
+     */
+    public void setDpi(int dpi) {
+        this.dpi = dpi;
+    }
+
+    /**
+     * Returns the set wanted <i>RAM</i> of the testing device.
+     * 
+     * @return the set wanted ram.
+     */
+    public int getRam() {
+        return ram;
+    }
+
+    /**
+     * Sets the wanted RAM amount of the testing device.
+     * 
+     * @param ram
+     *        the wanted device ram amount.
+     */
+    public void setRam(int ram) {
+        this.ram = ram;
+    }
+
+    public int getApiLevel() {
+        return apiLevel;
+    }
+
+    public void setApiLevel(int apiLevel) {
+        if (deviceOs == DeviceOs.NO_PREFERENCE) {
+            this.apiLevel = apiLevel;
+            return;
+        }
+
+        int currentApiLevel = deviceOs.getApiLevel();
+        if (currentApiLevel != apiLevel) {
+            deviceOs = DEVICE_OS_NO_PREFERENCE;
+            String messageFormat = "Device OS and API level missmatch when trying to set the API level. Device OS changed to %s.";
+            String message = String.format(messageFormat, DEVICE_OS_NO_PREFERENCE.toString());
+            LOGGER.warn(message);
+        }
+    }
 }

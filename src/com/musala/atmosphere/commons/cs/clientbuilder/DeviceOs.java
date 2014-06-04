@@ -1,92 +1,89 @@
 package com.musala.atmosphere.commons.cs.clientbuilder;
 
 /**
- * This enumeration contains all possible values for devices' OS. For now there
- * are nine options.
+ * This enumeration contains all possible values for devices' OS.
  * 
  * @author yavor.stankov
  * 
  */
 
 public enum DeviceOs {
-	/**
-	 * <i><b>Android 4.1</b></i>
-	 */
-	JELLY_BEAN_4_1("4.1"),
+    /**
+     * <i><b>Android 4.1</b></i>
+     */
+    JELLY_BEAN_4_1("4.1", 16),
 
-	/**
-	 * <i><b>Android 4.2.1</b></i>
-	 */
-	JELLY_BEAN_MR1_4_2_1("4.2.1"),
+    /**
+     * <i><b>Android 4.2.1</b></i>
+     */
+    JELLY_BEAN_MR1_4_2_1("4.2.1", 17),
 
-	/**
-	 * <i><b>Android 4.2.2</b></i>
-	 */
-	JELLY_BEAN_MR1_4_2_2("4.2.2"),
+    /**
+     * <i><b>Android 4.2.2</b></i>
+     */
+    JELLY_BEAN_MR1_4_2_2("4.2.2", 17),
 
-	/**
-	 * <i><b>Android 4.3</b></i>
-	 */
-	JELLY_BEAN_MR2_4_3("4.3"),
+    /**
+     * <i><b>Android 4.3</b></i>
+     */
+    JELLY_BEAN_MR2_4_3("4.3", 18),
 
-	/**
-	 * <i><b>Android 4.4</b></i>
-	 */
-	KITKAT_4_4("4.4"),
+    /**
+     * <i><b>Android 4.4</b></i>
+     */
+    KITKAT_4_4("4.4", 19),
 
-	/**
-	 * <i><b>Android 4.4.1</b></i>
-	 */
-	KITKAT_4_4_1("4.4.1"),
+    /**
+     * <i><b>Android 4.4.1</b></i>
+     */
+    KITKAT_4_4_1("4.4.1", 19),
 
-	/**
-	 * <i><b>Android 4.4.2</b></i>
-	 */
-	KITKAT_4_4_2("4.4.2"),
+    /**
+     * <i><b>Android 4.4.2</b></i>
+     */
+    KITKAT_4_4_2("4.4.2", 19),
 
-	/**
-	 * <i><b>Android 4.4.2</b></i>
-	 */
-	KITKAT_4_4_3("4.4.3"),
+    /**
+     * <i><b>Android 4.4.2</b></i>
+     */
+    KITKAT_4_4_3("4.4.3", 19),
 
-	/**
-	 * It means <i>"any available OS"</i>. OS by default when constructing new
-	 * device.
-	 */
-	NO_PREFERENCE("no_preference");
+    /**
+     * It means <i>"any available OS"</i>. OS by default when constructing new device.
+     */
+    NO_PREFERENCE("no_preference", -1);
 
-	private String value;
+    private String deviceOs;
 
-	private DeviceOs(String deviceOs) {
-		this.value = deviceOs;
-	}
+    private int apiLevel;
 
-	@Override
-	public String toString() {
-		return value;
-	}
+    private DeviceOs(String deviceOs, int apiLevel) {
+        this.deviceOs = deviceOs;
+        this.apiLevel = apiLevel;
+    }
 
-	public DeviceOs getDeviceOs(String os) {
-		switch (os) {
-		case "4.1":
-			return JELLY_BEAN_4_1;
-		case "4.2.1":
-			return JELLY_BEAN_MR1_4_2_1;
-		case "4.2.2":
-			return JELLY_BEAN_MR1_4_2_2;
-		case "4.3":
-			return JELLY_BEAN_MR2_4_3;
-		case "4.4":
-			return KITKAT_4_4;
-		case "4.4.1":
-			return KITKAT_4_4_1;
-		case "4.4.2":
-			return KITKAT_4_4_2;
-		case "4.4.3":
-			return KITKAT_4_4_3;
-		default:
-			return NO_PREFERENCE;
-		}
-	}
+    /**
+     * Gets the API level for the given operating system version.
+     * 
+     * @return the API level for the given operating system version.
+     */
+    public int getApiLevel() {
+        return apiLevel;
+    }
+
+    @Override
+    public String toString() {
+        return deviceOs;
+    }
+
+    public DeviceOs getDeviceOs(String os) {
+        for (DeviceOs currentOs : DeviceOs.values()) {
+            if (os.equals(currentOs.toString())) {
+                return currentOs;
+            }
+        }
+
+        return NO_PREFERENCE;
+    }
 
 }
