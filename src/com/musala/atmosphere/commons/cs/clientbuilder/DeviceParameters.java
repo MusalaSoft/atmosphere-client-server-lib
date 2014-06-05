@@ -115,6 +115,7 @@ public class DeviceParameters implements Serializable {
 
         int osApiLevel = deviceOs.getApiLevel();
         if (osApiLevel != apiLevel) {
+            this.deviceOs = os;
             apiLevel = osApiLevel;
             String messageFormat = "Device OS and API level missmatch when trying to set the OS type. Device API level changed to %d.";
             String message = String.format(messageFormat, osApiLevel);
@@ -248,6 +249,7 @@ public class DeviceParameters implements Serializable {
 
         int currentApiLevel = deviceOs.getApiLevel();
         if (currentApiLevel != apiLevel) {
+            this.apiLevel = apiLevel;
             deviceOs = DEVICE_OS_NO_PREFERENCE;
             String messageFormat = "Device OS and API level missmatch when trying to set the API level. Device OS changed to %s.";
             String message = String.format(messageFormat, DEVICE_OS_NO_PREFERENCE.toString());
