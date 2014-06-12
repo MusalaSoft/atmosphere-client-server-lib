@@ -38,6 +38,8 @@ public class DeviceParameters implements Serializable {
 
     public static final String MODEL_NO_PREFERENCE = "not set";
 
+    public static final Boolean HAS_CAMERA_NO_PREFERENCE = null;
+
     /**
      * DeviceParameters data members.
      */
@@ -59,6 +61,8 @@ public class DeviceParameters implements Serializable {
 
     private String model;
 
+    private Boolean hasCamera;
+
     /**
      * Constructor that sets all properties to their default (no preference) values.
      */
@@ -69,8 +73,10 @@ public class DeviceParameters implements Serializable {
         resolutionWidth = RESOLUTION_WIDTH_NO_PREFERENCE;
         dpi = DPI_NO_PREFERENCE;
         ram = RAM_NO_PREFERENCE;
+        apiLevel = API_LEVEL_NO_PREFERENCE;
         serialNumber = SERIALNUMBER_NO_PREFERENCE;
         model = MODEL_NO_PREFERENCE;
+        hasCamera = HAS_CAMERA_NO_PREFERENCE;
     }
 
     /**
@@ -255,5 +261,25 @@ public class DeviceParameters implements Serializable {
             String message = String.format(messageFormat, DEVICE_OS_NO_PREFERENCE.toString());
             LOGGER.warn(message);
         }
+    }
+
+    /**
+     * Returns expected value for camera presence on the device.
+     * 
+     * @return - true, if there is a requirement for hardware presence of camera on the device, and false otherwise.
+     */
+    public Boolean hasCameraPresent() {
+        return hasCamera;
+    }
+
+    /**
+     * Sets whether a camera should be presented on the required device.
+     * 
+     * @param hasCamera
+     *        - true, if the allocated device for this properties, should have at least one camera, and false if it must
+     *        not have any.
+     */
+    public void setCameraPresent(Boolean hasCamera) {
+        this.hasCamera = hasCamera;
     }
 }
