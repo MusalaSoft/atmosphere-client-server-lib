@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import org.apache.log4j.Logger;
 
+import com.musala.atmosphere.commons.DeviceInformation;
+import com.musala.atmosphere.commons.util.Pair;
+
 /**
  * Holds the parameters, needed to construct new device. If the current parameter is not needed it is set by default to
  * "No preference".
@@ -77,6 +80,32 @@ public class DeviceParameters implements Serializable {
         serialNumber = SERIALNUMBER_NO_PREFERENCE;
         model = MODEL_NO_PREFERENCE;
         hasCamera = HAS_CAMERA_NO_PREFERENCE;
+    }
+
+    /**
+     * Constructor that sets all properties to that of the device information given
+     * 
+     * @param os
+     *        - {@link DeviceInformation DeviceInformation}
+     */
+    public DeviceParameters(DeviceInformation deviceInformation) {
+        this();
+        if (deviceInformation.isEmulator()) {
+            deviceType = DeviceType.EMULATOR_ONLY;
+        } else {
+            deviceType = DeviceType.DEVICE_ONLY;
+        }
+        String os = deviceInformation.getOS();
+        deviceOs = DeviceOs.getDeviceOs(os);
+        apiLevel = deviceInformation.getApiLevel();
+        Pair<Integer, Integer> resolution = deviceInformation.getResolution();
+        resolutionHeight = resolution.getKey();
+        resolutionWidth = resolution.getValue();
+        dpi = deviceInformation.getDpi();
+        ram = deviceInformation.getRam();
+        serialNumber = deviceInformation.getSerialNumber();
+        model = deviceInformation.getModel();
+        hasCamera = deviceInformation.hasCamera();
     }
 
     /**

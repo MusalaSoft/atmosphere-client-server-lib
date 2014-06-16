@@ -76,7 +76,7 @@ public enum DeviceOs {
         return deviceOs;
     }
 
-    public DeviceOs getDeviceOs(String os) {
+    public static DeviceOs getDeviceOs(String os) {
         for (DeviceOs currentOs : DeviceOs.values()) {
             if (os.equals(currentOs.toString())) {
                 return currentOs;
