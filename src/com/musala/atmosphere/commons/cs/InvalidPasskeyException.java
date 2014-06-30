@@ -6,25 +6,21 @@ package com.musala.atmosphere.commons.cs;
  * @author georgi.gaydarov
  * 
  */
-public class InvalidPasskeyException extends Exception
-{
-	/**
-	 * auto-generated serialization id
-	 */
-	private static final long serialVersionUID = -8520385658531894843L;
+public class InvalidPasskeyException extends Exception {
+    /**
+     * auto-generated serialization id
+     */
+    private static final long serialVersionUID = -8520385658531894843L;
 
-	public InvalidPasskeyException()
-	{
-	}
+    public InvalidPasskeyException() {
+    }
 
-	// Constructor that accepts a message
-	public InvalidPasskeyException(String message)
-	{
-		super(message);
-	}
+    // Constructor that accepts a message
+    public InvalidPasskeyException(String message) {
+        super(message);
+    }
 
-	public InvalidPasskeyException(String message, Throwable inner)
-	{
-		super(message, inner);
-	}
+    public InvalidPasskeyException(String message, Throwable inner) {
+        super(message, inner);
+    }
 }

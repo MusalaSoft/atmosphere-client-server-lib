@@ -8,46 +8,42 @@ import java.io.Serializable;
  * @author georgi.gaydarov
  * 
  */
-public class DeviceAllocationInformation implements Serializable
-{
+public class DeviceAllocationInformation implements Serializable {
 
-	/**
-	 * auto generated serialization id
-	 */
-	private static final long serialVersionUID = 8870925753196812717L;
+    /**
+     * auto generated serialization id
+     */
+    private static final long serialVersionUID = 8870925753196812717L;
 
-	private String proxyRmiId;
+    private String proxyRmiId;
 
-	private long proxyPasskey;
+    private long proxyPasskey;
 
-	/**
-	 * 
-	 * @param proxyRmiId
-	 *        - DeviceProxy's RMI binding identifier.
-	 * @param proxyPasskey
-	 *        - passkey to be used in the DeviceProxy method invocations.
-	 */
-	public DeviceAllocationInformation(String proxyRmiId, Long proxyPasskey)
-	{
-		this.proxyRmiId = proxyRmiId;
-		this.proxyPasskey = proxyPasskey;
-	}
+    /**
+     * 
+     * @param proxyRmiId
+     *        - DeviceProxy's RMI binding identifier.
+     * @param proxyPasskey
+     *        - passkey to be used in the DeviceProxy method invocations.
+     */
+    public DeviceAllocationInformation(String proxyRmiId, Long proxyPasskey) {
+        this.proxyRmiId = proxyRmiId;
+        this.proxyPasskey = proxyPasskey;
+    }
 
-	/**
-	 * 
-	 * @return the allocated device's DeviceProxy RMI binding identifier.
-	 */
-	public String getProxyRmiId()
-	{
-		return proxyRmiId;
-	}
+    /**
+     * 
+     * @return the allocated device's DeviceProxy RMI binding identifier.
+     */
+    public String getProxyRmiId() {
+        return proxyRmiId;
+    }
 
-	/**
-	 * 
-	 * @return the passkey to be used in the DeviceProxy method invocations.
-	 */
-	public long getProxyPasskey()
-	{
-		return proxyPasskey;
-	}
+    /**
+     * 
+     * @return the passkey to be used in the DeviceProxy method invocations.
+     */
+    public long getProxyPasskey() {
+        return proxyPasskey;
+    }
 }
