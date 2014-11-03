@@ -311,4 +311,21 @@ public class DeviceParameters implements Serializable {
     public void setCameraPresent(Boolean hasCamera) {
         this.hasCamera = hasCamera;
     }
+
+    @Override
+    public String toString() {
+        String deviceParameters = String.format("DeviceParameters [deviceType=%s, deviceOs=%s, apiLevel=%s, resolutionHeight=%s, resolutionWidth=%s, dpi=%s, ram=%s, serialNumber=%s, model=%s, hasCamera=%s]",
+                                                deviceType,
+                                                deviceOs,
+                                                apiLevel,
+                                                resolutionHeight,
+                                                resolutionWidth,
+                                                dpi,
+                                                ram,
+                                                serialNumber,
+                                                model,
+                                                hasCamera);
+        return deviceParameters;
+    }
+
 }
