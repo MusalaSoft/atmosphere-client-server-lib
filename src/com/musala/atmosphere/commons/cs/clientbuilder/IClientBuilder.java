@@ -3,7 +3,8 @@ package com.musala.atmosphere.commons.cs.clientbuilder;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import com.musala.atmosphere.commons.cs.InvalidPasskeyException;
+import com.musala.atmosphere.commons.cs.exception.DeviceNotFoundException;
+import com.musala.atmosphere.commons.cs.exception.InvalidPasskeyException;
 
 /**
  * Used implicitly by the client's Builder to get available devices which have given device properties. The Builder
@@ -21,12 +22,12 @@ public interface IClientBuilder extends Remote {
      * device with given properties to be used by the client.
      * 
      * @param deviceParameters
-     *        - requested device parameters.
+     *        - requested device parameters
      * @return {@link DeviceAllocationInformation DeviceAllocationInformation} descriptor of a device with requested
      *         properties.
      * @throws RemoteException
-     *         a RemoteException is thrown when the execution of a remotely called method fails for some reason - broken
-     *         connection, missing method or something else.
+     *         thrown when the execution of a remotely called method fails for some reason - broken connection, missing
+     *         method or something else
      */
     public DeviceAllocationInformation allocateDevice(DeviceParameters deviceParameters) throws RemoteException;
 
@@ -34,11 +35,17 @@ public interface IClientBuilder extends Remote {
      * Releases allocated device from a Client and returns it in the pool.
      * 
      * @param allocatedDeviceDescriptor
-     *        - the descriptor that was returned when the device was allocated.
+     *        - the descriptor that was returned when the device was allocated
      * @throws RemoteException
+     *         thrown when the execution of a remotely called method fails for some reason - broken connection, missing
+     *         method or something else
      * @throws InvalidPasskeyException
+     *         thrown when the passed passkey is not valid
+     * @throws DeviceNotFoundException
+     *         thrown when an action fails, because the server fails to find the target device
      */
     public void releaseDevice(DeviceAllocationInformation allocatedDeviceDescriptor)
         throws RemoteException,
-            InvalidPasskeyException;
+            InvalidPasskeyException,
+            DeviceNotFoundException;
 }

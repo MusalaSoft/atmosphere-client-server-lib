@@ -1,4 +1,4 @@
-package com.musala.atmosphere.commons.cs;
+package com.musala.atmosphere.commons.cs.exception;
 
 /**
  * Thrown when a passed passkey is not valid in the {@link DeviceProxy DeviceProxy} context.
