@@ -148,7 +148,7 @@ public class DeviceParameters implements Serializable {
             return;
         }
 
-        int osApiLevel = deviceOs.getApiLevel();
+        int osApiLevel = os.getApiLevel();
         if (osApiLevel != apiLevel) {
             this.deviceOs = os;
             apiLevel = osApiLevel;

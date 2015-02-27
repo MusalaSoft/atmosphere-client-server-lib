@@ -49,6 +49,26 @@ public enum DeviceOs {
     KITKAT_4_4_3("4.4.3", 19),
 
     /**
+     * <i><b>Android 4.4.4</b></i>
+     */
+    KITKAT_4_4_4("4.4.4", 19),
+
+    /**
+     * <i><b>Android 5.0</b></i>
+     */
+    LOLLIPOP_5("5.0", 21),
+
+    /**
+     * <i><b>Android 5.0.1</b></i>
+     */
+    LOLLIPOP_5_0_1("5.0.1", 21),
+
+    /**
+     * <i><b>Android 5.0.2</b></i>
+     */
+    LOLLIPOP_5_0_2("5.0.2", 21),
+
+    /**
      * It means <i>"any available OS"</i>. OS by default when constructing new device.
      */
     NO_PREFERENCE("no_preference", -1);
