@@ -27,7 +27,7 @@ public class DeviceParameters implements Serializable {
 
     public static final DeviceOs DEVICE_OS_NO_PREFERENCE = DeviceOs.NO_PREFERENCE;
 
-    public static final int API_LEVEL_NO_PREFERENCE = DEVICE_OS_NO_PREFERENCE.getApiLevel();
+    public static final int TARGET_API_LEVEL_NO_PREFERENCE = DEVICE_OS_NO_PREFERENCE.getApiLevel();
 
     public static final int RESOLUTION_HEIGHT_NO_PREFERENCE = -1;
 
@@ -43,6 +43,10 @@ public class DeviceParameters implements Serializable {
 
     public static final Boolean HAS_CAMERA_NO_PREFERENCE = null;
 
+    public static final int MIN_API_LEVEL_NO_PREFERENCE = -1;
+
+    public static final int MAX_API_LEVEL_NO_PREFERENCE = -1;
+
     /**
      * DeviceParameters data members.
      */
@@ -50,7 +54,7 @@ public class DeviceParameters implements Serializable {
 
     private DeviceOs deviceOs;
 
-    private int apiLevel;
+    private int targetApiLevel;
 
     private int resolutionHeight;
 
@@ -66,6 +70,10 @@ public class DeviceParameters implements Serializable {
 
     private Boolean hasCamera;
 
+    private int minApiLevel;
+
+    private int maxApiLevel;
+
     /**
      * Constructor that sets all properties to their default (no preference) values.
      */
@@ -76,10 +84,12 @@ public class DeviceParameters implements Serializable {
         resolutionWidth = RESOLUTION_WIDTH_NO_PREFERENCE;
         dpi = DPI_NO_PREFERENCE;
         ram = RAM_NO_PREFERENCE;
-        apiLevel = API_LEVEL_NO_PREFERENCE;
+        targetApiLevel = TARGET_API_LEVEL_NO_PREFERENCE;
         serialNumber = SERIALNUMBER_NO_PREFERENCE;
         model = MODEL_NO_PREFERENCE;
         hasCamera = HAS_CAMERA_NO_PREFERENCE;
+        minApiLevel = MIN_API_LEVEL_NO_PREFERENCE;
+        maxApiLevel = MAX_API_LEVEL_NO_PREFERENCE;
     }
 
     /**
@@ -97,7 +107,7 @@ public class DeviceParameters implements Serializable {
         }
         String os = deviceInformation.getOS();
         deviceOs = DeviceOs.getDeviceOs(os);
-        apiLevel = deviceInformation.getApiLevel();
+        targetApiLevel = deviceInformation.getApiLevel();
         Pair<Integer, Integer> resolution = deviceInformation.getResolution();
         resolutionHeight = resolution.getKey();
         resolutionWidth = resolution.getValue();
@@ -106,6 +116,8 @@ public class DeviceParameters implements Serializable {
         serialNumber = deviceInformation.getSerialNumber();
         model = deviceInformation.getModel();
         hasCamera = deviceInformation.hasCamera();
+        maxApiLevel = MAX_API_LEVEL_NO_PREFERENCE;
+        minApiLevel = MIN_API_LEVEL_NO_PREFERENCE;
     }
 
     /**
@@ -143,16 +155,16 @@ public class DeviceParameters implements Serializable {
      *        - {@link DeviceOs DeviceOs}
      */
     public void setOs(DeviceOs os) {
-        if (apiLevel == API_LEVEL_NO_PREFERENCE) {
+        if (targetApiLevel == TARGET_API_LEVEL_NO_PREFERENCE) {
             this.deviceOs = os;
             return;
         }
 
         int osApiLevel = os.getApiLevel();
-        if (osApiLevel != apiLevel) {
+        if (osApiLevel != targetApiLevel) {
             this.deviceOs = os;
-            apiLevel = osApiLevel;
-            String messageFormat = "Device OS and API level missmatch when trying to set the OS type. Device API level changed to %d.";
+            targetApiLevel = osApiLevel;
+            String messageFormat = "Device OS and target API level missmatch when trying to set the OS type. Device target API level changed to %d.";
             String message = String.format(messageFormat, osApiLevel);
             LOGGER.warn(message);
         }
@@ -272,24 +284,101 @@ public class DeviceParameters implements Serializable {
         this.ram = ram;
     }
 
-    public int getApiLevel() {
-        return apiLevel;
+    /**
+     * Gets target API level for selecting a device.
+     */
+    public int getTargetApiLevel() {
+        return targetApiLevel;
     }
 
-    public void setApiLevel(int apiLevel) {
+    /**
+     * Sets the target API Version for selecting a device.
+     * 
+     * @param apiLevel
+     *        - target API level to be set
+     */
+    public void setTargetApiLevel(int apiLevel) {
+        if ((apiLevel < minApiLevel || apiLevel > maxApiLevel) && (maxApiLevel != MAX_API_LEVEL_NO_PREFERENCE)) {
+            String invalidApiLevelMessage = "The given target API level is not in the set range. Target ApiVersion was not changed.";
+            LOGGER.warn(invalidApiLevelMessage);
+            return;
+        }
+
         if (deviceOs == DeviceOs.NO_PREFERENCE) {
-            this.apiLevel = apiLevel;
+            this.targetApiLevel = apiLevel;
             return;
         }
 
         int currentApiLevel = deviceOs.getApiLevel();
         if (currentApiLevel != apiLevel) {
-            this.apiLevel = apiLevel;
+            this.targetApiLevel = apiLevel;
             deviceOs = DEVICE_OS_NO_PREFERENCE;
-            String messageFormat = "Device OS and API level missmatch when trying to set the API level. Device OS changed to %s.";
+            String messageFormat = "Device OS and target API level missmatch when trying to set the API level. Device OS changed to %s.";
             String message = String.format(messageFormat, DEVICE_OS_NO_PREFERENCE.toString());
             LOGGER.warn(message);
         }
+    }
+
+    /**
+     * Sets the minimum API version the device should have in order to be selected.
+     * 
+     * @param minApiLevel
+     *        - API level to be set
+     */
+    public void setMinApiLevel(int minApiLevel) {
+        if (targetApiLevel != TARGET_API_LEVEL_NO_PREFERENCE && minApiLevel > targetApiLevel) {
+            String invalidApiVersionMessage = "The given minimum API version is greater than the set target API version. Minimum API version was not changed!";
+            LOGGER.warn(invalidApiVersionMessage);
+            return;
+        }
+
+        if (maxApiLevel != MAX_API_LEVEL_NO_PREFERENCE && minApiLevel > maxApiLevel) {
+            String invalidMinApiVersionMessage = "The given minimum API version is greater than the set maximum API version. Minimum API version was not changed!";
+            LOGGER.warn(invalidMinApiVersionMessage);
+            return;
+        }
+
+        this.minApiLevel = minApiLevel;
+    }
+
+    /**
+     * Sets the maximum API version the device should have in order to be selected.
+     * 
+     * @param maxApiLevel
+     *        - API level to be set
+     */
+    public void setMaxApiLevel(int maxApiLevel) {
+        if (targetApiLevel != TARGET_API_LEVEL_NO_PREFERENCE && maxApiLevel < targetApiLevel) {
+            String invalidApiVersionMessage = "The given maximum API version is lesser than the set target API version. Maximum API version was not changed!";
+            LOGGER.warn(invalidApiVersionMessage);
+            return;
+        }
+
+        if (maxApiLevel < minApiLevel) {
+            String invalidMaxApiVersionMessage = "The given maximum API version is lesser than the set minimum API version. Maximum API version was not changed!";
+            LOGGER.warn(invalidMaxApiVersionMessage);
+            return;
+        }
+
+        this.maxApiLevel = maxApiLevel;
+    }
+
+    /**
+     * Gets the minimum API version the device should have in order to be selected.
+     * 
+     * @return minimum API version
+     */
+    public int getMinApiLevel() {
+        return minApiLevel;
+    }
+
+    /**
+     * Gets maximum API version the device should have in order to be selected.
+     * 
+     * @return maximum API version
+     */
+    public int getMaxApiLevel() {
+        return maxApiLevel;
     }
 
     /**
@@ -314,18 +403,19 @@ public class DeviceParameters implements Serializable {
 
     @Override
     public String toString() {
-        String deviceParameters = String.format("DeviceParameters [deviceType=%s, deviceOs=%s, apiLevel=%s, resolutionHeight=%s, resolutionWidth=%s, dpi=%s, ram=%s, serialNumber=%s, model=%s, hasCamera=%s]",
+        String deviceParameters = String.format("DeviceParameters [deviceType=%s, deviceOs=%s, targetApiLevel=%s, resolutionHeight=%s, resolutionWidth=%s, dpi=%s, ram=%s, serialNumber=%s, model=%s, hasCamera=%s, minApiLevel=%s, maxApiLevel=%s]",
                                                 deviceType,
                                                 deviceOs,
-                                                apiLevel,
+                                                targetApiLevel,
                                                 resolutionHeight,
                                                 resolutionWidth,
                                                 dpi,
                                                 ram,
                                                 serialNumber,
                                                 model,
-                                                hasCamera);
+                                                hasCamera,
+                                                minApiLevel,
+                                                maxApiLevel);
         return deviceParameters;
     }
-
 }
