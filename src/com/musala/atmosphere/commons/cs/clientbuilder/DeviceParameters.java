@@ -5,6 +5,8 @@ import java.io.Serializable;
 import org.apache.log4j.Logger;
 
 import com.musala.atmosphere.commons.DeviceInformation;
+import com.musala.atmosphere.commons.cs.deviceselection.DeviceOs;
+import com.musala.atmosphere.commons.cs.deviceselection.DeviceType;
 import com.musala.atmosphere.commons.util.Pair;
 
 /**
@@ -90,6 +92,7 @@ public class DeviceParameters implements Serializable {
         hasCamera = HAS_CAMERA_NO_PREFERENCE;
         minApiLevel = MIN_API_LEVEL_NO_PREFERENCE;
         maxApiLevel = MAX_API_LEVEL_NO_PREFERENCE;
+       
     }
 
     /**

@@ -1,4 +1,5 @@
-package com.musala.atmosphere.commons.cs.clientbuilder;
+package com.musala.atmosphere.commons.cs.deviceselection;
+
 
 /**
  * Enumeration with all possible choices for requesting physical presence of device - <i>EMULATOR_ONLY</i>,
@@ -8,7 +9,7 @@ package com.musala.atmosphere.commons.cs.clientbuilder;
  * 
  */
 
-public enum DeviceType {
+public enum DeviceType implements DeviceParameter {
     /**
      * <i><b>EMULATOR_ONLY</b></i>
      */
@@ -58,6 +59,11 @@ public enum DeviceType {
             default:
                 return NO_PREFERENCE;
         }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
 }

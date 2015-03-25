@@ -1,4 +1,4 @@
-package com.musala.atmosphere.commons.cs.clientbuilder;
+package com.musala.atmosphere.commons.cs.deviceselection;
 
 /**
  * This enumeration contains all possible values for devices' OS.
@@ -7,7 +7,7 @@ package com.musala.atmosphere.commons.cs.clientbuilder;
  * 
  */
 
-public enum DeviceOs {
+public enum DeviceOs implements DeviceParameter {
     /**
      * <i><b>Android 4.1</b></i>
      */
@@ -104,6 +104,11 @@ public enum DeviceOs {
         }
 
         return NO_PREFERENCE;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
 }
