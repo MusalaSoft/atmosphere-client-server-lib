@@ -104,6 +104,22 @@ public class DeviceSelectorBuilder {
     }
 
     /**
+     * Sets the {@link DeviceType type} of a device.
+     * 
+     * @param type
+     *        - the device`s type, cannot be <code>null</code>
+     * @return the same instance of this {@link DeviceSelectorBuilder}
+     * @throws ValidationException
+     *         if type is <code>null</code>
+     */
+    public DeviceSelectorBuilder deviceType(DeviceType type) {
+        validator.validateNotNull(type);
+        definedParameters.put(DeviceType.class, type);
+
+        return this;
+    }
+
+    /**
      * Sets whether a device should have a camera.
      * 
      * @param isCameraAvailable
@@ -216,5 +232,29 @@ public class DeviceSelectorBuilder {
         definedParameters.put(SerialNumber.class, sn);
 
         return this;
+    }
+
+    /**
+     * Gets a {@link DeviceSelector} with the previously specified parameters in this builder. After this method is
+     * executed, the builder is reset and can be used again to build another {@link DeviceSelector selector}. If some of
+     * the specified {@link DeviceParameter parameters} are incompatible with each other, an exception is thrown and the
+     * builder is NOT reset.
+     * 
+     * @return validated {@link DeviceSelector}
+     * @throws ValidationException
+     *         if some of the specified {@link DeviceParameter parameters} are incompatible
+     */
+    public DeviceSelector build() {
+        ApiLevel.Minimum minApi = (ApiLevel.Minimum) definedParameters.get(ApiLevel.Minimum.class);
+        ApiLevel.Maximum maxApi = (ApiLevel.Maximum) definedParameters.get(ApiLevel.Maximum.class);
+        ApiLevel.Target targetApi = (ApiLevel.Target) definedParameters.get(ApiLevel.Target.class);
+        DeviceOs os = (DeviceOs) definedParameters.get(DeviceOs.class);
+
+        validator.validateCompatibility(minApi, maxApi, targetApi, os);
+
+        DeviceSelector selector = new DeviceSelector(definedParameters);
+        definedParameters.clear();
+
+        return selector;
     }
 }
