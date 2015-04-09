@@ -3,6 +3,7 @@ package com.musala.atmosphere.commons.cs.deviceselection;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.musala.atmosphere.commons.cs.deviceselection.DeviceParameter.Visitor;
 
@@ -11,7 +12,7 @@ import com.musala.atmosphere.commons.cs.deviceselection.DeviceParameter.Visitor;
  * parameters}.
  * 
  * @author vassil.angelov
- *
+ * 
  */
 public class DeviceSelector implements Serializable {
 
@@ -38,6 +39,20 @@ public class DeviceSelector implements Serializable {
         for (DeviceParameter parameter : deviceParameters.values()) {
             parameter.accept(visitor);
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder selectorRepresentation = new StringBuilder();
+
+        for (Entry<Class<? extends DeviceParameter>, DeviceParameter> parameterPair : deviceParameters.entrySet()) {
+            String parameterRepresentation = String.format("%s = %s; ",
+                                                           parameterPair.getKey().getSimpleName(),
+                                                           parameterPair.getValue());
+            selectorRepresentation.append(parameterRepresentation);
+        }
+
+        return selectorRepresentation.toString();
     }
 
     /**

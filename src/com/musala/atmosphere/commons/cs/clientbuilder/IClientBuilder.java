@@ -3,6 +3,7 @@ package com.musala.atmosphere.commons.cs.clientbuilder;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import com.musala.atmosphere.commons.cs.deviceselection.DeviceSelector;
 import com.musala.atmosphere.commons.cs.exception.DeviceNotFoundException;
 import com.musala.atmosphere.commons.cs.exception.InvalidPasskeyException;
 
@@ -29,6 +30,7 @@ public interface IClientBuilder extends Remote {
      *         thrown when the execution of a remotely called method fails for some reason - broken connection, missing
      *         method or something else
      */
+    @Deprecated
     public DeviceAllocationInformation allocateDevice(DeviceParameters deviceParameters) throws RemoteException;
 
     /**
@@ -48,4 +50,18 @@ public interface IClientBuilder extends Remote {
         throws RemoteException,
             InvalidPasskeyException,
             DeviceNotFoundException;
+
+    /**
+     * Returns {@link DeviceAllocationInformation DeviceAllocationInformation} descriptor structure of an available
+     * device with given properties to be used by the client.
+     * 
+     * @param deviceSelector
+     *        - contains all the requested device parameters
+     * @return {@link DeviceAllocationInformation DeviceAllocationInformation} descriptor of a device with requested
+     *         properties
+     * @throws RemoteException
+     *         thrown when the execution of a remotely called method fails for some reason - broken connection, missing
+     *         method or something else
+     */
+    public DeviceAllocationInformation allocateDevice(DeviceSelector deviceSelector) throws RemoteException;
 }

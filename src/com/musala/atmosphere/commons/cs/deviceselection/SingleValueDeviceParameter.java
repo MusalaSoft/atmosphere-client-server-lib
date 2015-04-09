@@ -4,7 +4,7 @@ package com.musala.atmosphere.commons.cs.deviceselection;
  * Abstraction over a single valued implementations of {@link DeviceParameter}.
  * 
  * @author vassil.angelov
- *
+ * 
  * @param <T>
  *        - the type of the parameter`s value
  */
@@ -23,4 +23,8 @@ public abstract class SingleValueDeviceParameter<T> implements DeviceParameter {
         return value;
     }
 
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }

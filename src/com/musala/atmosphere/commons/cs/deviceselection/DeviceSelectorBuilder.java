@@ -15,7 +15,7 @@ import com.musala.atmosphere.commons.cs.exception.ValidationException;
  * the incompatible parameters should be resolved in order to get a DeviceSelector.
  * 
  * @author vassil.angelov
- *
+ * 
  */
 public class DeviceSelectorBuilder {
     private DeviceParametersValidator validator;
@@ -249,6 +249,16 @@ public class DeviceSelectorBuilder {
         ApiLevel.Maximum maxApi = (ApiLevel.Maximum) definedParameters.get(ApiLevel.Maximum.class);
         ApiLevel.Target targetApi = (ApiLevel.Target) definedParameters.get(ApiLevel.Target.class);
         DeviceOs os = (DeviceOs) definedParameters.get(DeviceOs.class);
+
+        if (minApi == null && targetApi != null) {
+            minApi = new ApiLevel.Minimum(targetApi.getValue());
+            definedParameters.put(ApiLevel.Minimum.class, minApi);
+        }
+
+        if (maxApi == null && targetApi != null) {
+            maxApi = new ApiLevel.Maximum(targetApi.getValue());
+            definedParameters.put(ApiLevel.Maximum.class, maxApi);
+        }
 
         validator.validateCompatibility(minApi, maxApi, targetApi, os);
 
