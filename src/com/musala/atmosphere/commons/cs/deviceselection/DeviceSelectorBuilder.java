@@ -250,13 +250,10 @@ public class DeviceSelectorBuilder {
         ApiLevel.Target targetApi = (ApiLevel.Target) definedParameters.get(ApiLevel.Target.class);
         DeviceOs os = (DeviceOs) definedParameters.get(DeviceOs.class);
 
-        if (minApi == null && targetApi != null) {
+        if (minApi == null && maxApi == null && targetApi != null) {
             minApi = new ApiLevel.Minimum(targetApi.getValue());
-            definedParameters.put(ApiLevel.Minimum.class, minApi);
-        }
-
-        if (maxApi == null && targetApi != null) {
             maxApi = new ApiLevel.Maximum(targetApi.getValue());
+            definedParameters.put(ApiLevel.Minimum.class, minApi);
             definedParameters.put(ApiLevel.Maximum.class, maxApi);
         }
 
