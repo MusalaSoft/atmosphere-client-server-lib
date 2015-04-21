@@ -25,11 +25,11 @@ public class DeviceParameters implements Serializable {
     /**
      * Default values for device properties.
      */
-    public static final DeviceType DEVICE_TYPE_NO_PREFERENCE = DeviceType.NO_PREFERENCE;
+    public static final DeviceType DEVICE_TYPE_NO_PREFERENCE = null;
 
-    public static final DeviceOs DEVICE_OS_NO_PREFERENCE = DeviceOs.NO_PREFERENCE;
+    public static final DeviceOs DEVICE_OS_NO_PREFERENCE = null;
 
-    public static final int TARGET_API_LEVEL_NO_PREFERENCE = DEVICE_OS_NO_PREFERENCE.getApiLevel();
+    public static final int TARGET_API_LEVEL_NO_PREFERENCE = -1;
 
     public static final int RESOLUTION_HEIGHT_NO_PREFERENCE = -1;
 
@@ -92,7 +92,7 @@ public class DeviceParameters implements Serializable {
         hasCamera = HAS_CAMERA_NO_PREFERENCE;
         minApiLevel = MIN_API_LEVEL_NO_PREFERENCE;
         maxApiLevel = MAX_API_LEVEL_NO_PREFERENCE;
-       
+
     }
 
     /**
@@ -307,7 +307,7 @@ public class DeviceParameters implements Serializable {
             return;
         }
 
-        if (deviceOs == DeviceOs.NO_PREFERENCE) {
+        if (deviceOs == null) {
             this.targetApiLevel = apiLevel;
             return;
         }

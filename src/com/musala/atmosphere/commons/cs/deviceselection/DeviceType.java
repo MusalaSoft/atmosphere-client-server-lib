@@ -1,6 +1,5 @@
 package com.musala.atmosphere.commons.cs.deviceselection;
 
-
 /**
  * Enumeration with all possible choices for requesting physical presence of device - <i>EMULATOR_ONLY</i>,
  * <i>DEVICE_ONLY</i>, <i>EMULATOR_PREFERRED</i>, <i>DEVICE_PREFERRED</i> or <i>NO_PREFERENCE</i>.
@@ -28,12 +27,7 @@ public enum DeviceType implements DeviceParameter {
     /**
      * <i><b>DEVICE_PREFERRED</b></i>
      */
-    DEVICE_PREFERRED("device_preferred"),
-
-    /**
-     * <i><b>NO_PREFERENCE</b></i>
-     */
-    NO_PREFERENCE("no_preference");
+    DEVICE_PREFERRED("device_preferred");
 
     private String value;
 
@@ -46,7 +40,7 @@ public enum DeviceType implements DeviceParameter {
         return value;
     }
 
-    public DeviceType getDeviceType(String type) {
+    public static DeviceType getDeviceType(String type) {
         switch (type) {
             case "emulator_only":
                 return EMULATOR_ONLY;
@@ -57,7 +51,7 @@ public enum DeviceType implements DeviceParameter {
             case "device_preferred":
                 return DEVICE_PREFERRED;
             default:
-                return NO_PREFERENCE;
+                return null;
         }
     }
 

@@ -66,12 +66,7 @@ public enum DeviceOs implements DeviceParameter {
     /**
      * <i><b>Android 5.0.2</b></i>
      */
-    LOLLIPOP_5_0_2("5.0.2", 21),
-
-    /**
-     * It means <i>"any available OS"</i>. OS by default when constructing new device.
-     */
-    NO_PREFERENCE("no_preference", -1);
+    LOLLIPOP_5_0_2("5.0.2", 21);
 
     private String deviceOs;
 
@@ -103,7 +98,7 @@ public enum DeviceOs implements DeviceParameter {
             }
         }
 
-        return NO_PREFERENCE;
+        return null;
     }
 
     @Override
