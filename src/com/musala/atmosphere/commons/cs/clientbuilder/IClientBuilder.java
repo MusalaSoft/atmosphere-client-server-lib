@@ -19,21 +19,6 @@ import com.musala.atmosphere.commons.cs.exception.InvalidPasskeyException;
 
 public interface IClientBuilder extends Remote {
     /**
-     * Returns {@link DeviceAllocationInformation DeviceAllocationInformation} descriptor structure of an available
-     * device with given properties to be used by the client.
-     * 
-     * @param deviceParameters
-     *        - requested device parameters
-     * @return {@link DeviceAllocationInformation DeviceAllocationInformation} descriptor of a device with requested
-     *         properties.
-     * @throws RemoteException
-     *         thrown when the execution of a remotely called method fails for some reason - broken connection, missing
-     *         method or something else
-     */
-    @Deprecated
-    public DeviceAllocationInformation allocateDevice(DeviceParameters deviceParameters) throws RemoteException;
-
-    /**
      * Releases allocated device from a Client and returns it in the pool.
      * 
      * @param allocatedDeviceDescriptor
