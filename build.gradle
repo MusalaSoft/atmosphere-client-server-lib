@@ -1,0 +1,47 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+version = '0.0.1'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Atmosphere Client-Server Commons',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile 'com.musala.atmosphere:atmosphere-commons:0.0.1'
+
+    testCompile 'junit:junit:4.12'
+}
+
+sourceSets {
+    main.java.srcDir 'src'
+    test.java.srcDir 'test'
+}
+
+publishing {
+    publications {
+        atmosphereCommons(MavenPublication) {
+            groupId 'com.musala.atmosphere'
+            artifactId 'atmosphere-cs-commons'
+            version version
+
+            from components.java
+        }
+    }
+
+    repositories {
+        mavenLocal()
+    }
+}
+
+tasks.withType(Test) {
+    scanForTestClasses = false
+    include "**/*Test.class"
+}
