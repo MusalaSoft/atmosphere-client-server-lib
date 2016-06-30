@@ -4,7 +4,7 @@ apply plugin: 'maven-publish'
 version = '0.0.1'
 jar {
     manifest {
-        attributes 'Implementation-Title': 'Atmosphere Client-Server Commons',
+        attributes 'Implementation-Title': 'Atmosphere Client-Server Lib',
                    'Implementation-Version': version
     }
 }
@@ -22,9 +22,9 @@ dependencies {
 
 publishing {
     publications {
-        atmosphereCSCommons(MavenPublication) {
+        atmosphereClientServerLib(MavenPublication) {
             groupId 'com.musala.atmosphere'
-            artifactId 'atmosphere-cs-commons'
+            artifactId 'atmosphere-client-server-lib'
             version version
 
             from components.java
