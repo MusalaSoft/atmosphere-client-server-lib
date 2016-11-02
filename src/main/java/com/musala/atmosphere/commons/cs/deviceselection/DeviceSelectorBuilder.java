@@ -52,7 +52,7 @@ public class DeviceSelectorBuilder {
      * Sets the maximum API level a device should have. This parameter must be consistent (greater or equal to) with the
      * minimum API level and the defined DeviceOs, if any of them is also provided.
      * 
-     * @param minApi
+     * @param maxApi
      *        - the maximum API level of a device, must be a positive number
      * @return the same instance of this {@link DeviceSelectorBuilder}
      * @throws ValidationException

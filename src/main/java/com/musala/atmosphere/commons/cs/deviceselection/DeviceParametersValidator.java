@@ -96,7 +96,7 @@ public class DeviceParametersValidator {
     /**
      * Validates that the provided {@link ApiLevel} parameters are consistent. All parameters are optional and can be
      * <code>null</code>, but if defined they must be logically consistent. More specifically the following must be true
-     * for all defined parameters <code>minApi <= targetApi <= maxApi</code> .
+     * for all defined parameters <code>minApi &lt;= targetApi &lt;= maxApi</code> .
      * 
      * @param minApi
      *        - the minimum API version or <code>null</code>
@@ -135,7 +135,7 @@ public class DeviceParametersValidator {
 
     /**
      * Validates that the provided API levels and {@link DeviceOs} are compatible. Every {@link DeviceOs} is linked to a
-     * specific API version, which must be in the range defined by {@link ApiLevel.MinApi} and {@link ApiLevel.MaxApi}
+     * specific API version, which must be in the range defined by {@link ApiLevel.Minimum} and {@link ApiLevel.Maximum}
      * and match the {@link ApiLevel.Target}. All parameters are optional and can be <code>null</code>, but if defined
      * they must be compatible.
      * 

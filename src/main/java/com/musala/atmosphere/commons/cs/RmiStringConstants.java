@@ -2,7 +2,7 @@ package com.musala.atmosphere.commons.cs;
 
 public enum RmiStringConstants {
     /**
-     * String, under which the {@link PoolManager PoolManager} class is published in the Agent's RMI registry
+     * String, under which the PoolManager class is published in the Agent's RMI registry
      */
     POOL_MANAGER("PoolManager");
 
