@@ -2,10 +2,13 @@ package com.musala.atmosphere.commons.cs.clientbuilder;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.musala.atmosphere.commons.cs.deviceselection.DeviceSelector;
 import com.musala.atmosphere.commons.cs.exception.DeviceNotFoundException;
 import com.musala.atmosphere.commons.cs.exception.InvalidPasskeyException;
+import com.musala.atmosphere.commons.util.Pair;
 
 /**
  * Used implicitly by the client's Builder to get available devices which have given device properties. The Builder
@@ -49,4 +52,15 @@ public interface IClientBuilder extends Remote {
      *         method or something else
      */
     public DeviceAllocationInformation allocateDevice(DeviceSelector deviceSelector) throws RemoteException;
+    
+    /**
+     * Returns a {@link List} with serial numbers and models of all available devices.
+     * 
+     * @return {@link List} with serial numbers and models of all available devices
+     * 
+     * @throws RemoteException 
+     *         thrown when the execution of a remotely called method fails for some reason - broken connection, missing
+     *         method or something else
+     */
+    public List<Pair<String,String>> getAllAvailableDevices() throws RemoteException;
 }
