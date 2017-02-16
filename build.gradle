@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.musala.atmosphere:atmosphere-commons:0.0.1'
+    compile 'com.musala.atmosphere:atmosphere-commons:0.+'
 
     testCompile 'junit:junit:4.12'
 }
@@ -44,4 +44,14 @@ task wrapper(type: Wrapper) {
 tasks.withType(Test) {
     scanForTestClasses = false
     include "**/*Test.class"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
