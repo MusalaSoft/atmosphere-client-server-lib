@@ -7,8 +7,6 @@ package com.musala.atmosphere.commons.cs.deviceselection;
  *
  */
 public abstract class ScreenParameter extends SingleValueDeviceParameter<Integer> {
-    private static final long serialVersionUID = 6302348962853718603L;
-
     /**
      * The width in pixels of a device`s screen represented as a {@link DeviceParameter}.
      * 
@@ -16,8 +14,6 @@ public abstract class ScreenParameter extends SingleValueDeviceParameter<Integer
      *
      */
     public static class Width extends ScreenParameter {
-
-        private static final long serialVersionUID = 1596877014043856349L;
 
         @Override
         public void accept(Visitor visitor) {
@@ -37,7 +33,6 @@ public abstract class ScreenParameter extends SingleValueDeviceParameter<Integer
      *
      */
     public static class Height extends ScreenParameter {
-        private static final long serialVersionUID = 304783741558664933L;
 
         @Override
         public void accept(Visitor visitor) {
@@ -56,8 +51,6 @@ public abstract class ScreenParameter extends SingleValueDeviceParameter<Integer
      *
      */
     public static class DPI extends ScreenParameter {
-
-        private static final long serialVersionUID = 7905669904488868712L;
 
         @Override
         public void accept(Visitor visitor) {
