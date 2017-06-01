@@ -7,7 +7,6 @@ package com.musala.atmosphere.commons.cs.deviceselection;
  *
  */
 public class SerialNumber extends SingleValueDeviceParameter<String> {
-    private static final long serialVersionUID = 8852106326279523342L;
 
     @Override
     public void accept(Visitor visitor) {

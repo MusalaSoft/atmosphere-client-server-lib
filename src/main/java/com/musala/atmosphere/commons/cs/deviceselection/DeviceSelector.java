@@ -1,6 +1,5 @@
 package com.musala.atmosphere.commons.cs.deviceselection;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,10 +13,7 @@ import com.musala.atmosphere.commons.cs.deviceselection.DeviceParameter.Visitor;
  * @author vassil.angelov
  *
  */
-public class DeviceSelector implements Serializable {
-
-    private static final long serialVersionUID = -4906043158195925300L;
-
+public class DeviceSelector {
     private HashMap<Class<? extends DeviceParameter>, DeviceParameter> deviceParameters;
 
     /**

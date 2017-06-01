@@ -9,9 +9,6 @@ package com.musala.atmosphere.commons.cs.deviceselection;
  *        - the type of the parameter`s value
  */
 public abstract class SingleValueDeviceParameter<T> implements DeviceParameter {
-
-    private static final long serialVersionUID = -6737424119184144927L;
-
     T value;
 
     /**
