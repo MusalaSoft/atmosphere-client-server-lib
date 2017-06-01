@@ -7,7 +7,6 @@ package com.musala.atmosphere.commons.cs.deviceselection;
  *
  */
 public class RamCapacity extends SingleValueDeviceParameter<Integer> {
-    private static final long serialVersionUID = -351232342453505125L;
 
     @Override
     public void accept(Visitor visitor) {

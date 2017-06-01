@@ -1,7 +1,5 @@
 package com.musala.atmosphere.commons.cs.deviceselection;
 
-import java.io.Serializable;
-
 /**
  * Interface representing a parameter by which a device can be described. All known parameters are described in the
  * {@link Visitor} interface.
@@ -9,7 +7,7 @@ import java.io.Serializable;
  * @author vassil.angelov
  *
  */
-public interface DeviceParameter extends Serializable {
+public interface DeviceParameter {
 
     /**
      * Visitor that defines API for differentiating the various known implementations of {@link DeviceParameter}.
