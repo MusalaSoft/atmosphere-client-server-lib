@@ -2,14 +2,11 @@ package com.musala.atmosphere.commons.cs.exception;
 
 /**
  * Thrown when a passed passkey is not valid in the DeviceProxy context.
- * 
+ *
  * @author georgi.gaydarov
- * 
+ *
  */
 public class InvalidPasskeyException extends Exception {
-    /**
-     * auto-generated serialization id
-     */
     private static final long serialVersionUID = -8520385658531894843L;
 
     public InvalidPasskeyException() {
