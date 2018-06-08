@@ -36,6 +36,8 @@ public class DeviceSelector {
      * Creates new {@link DeviceSelector} with the specified parameters.
      *
      * @param parameters
+     *        - a map that contains a class that extends {@link DeviceParameter} as key and {@link DeviceParameter} as
+     *        value.
      */
     public DeviceSelector(Map<Class<? extends DeviceParameter>, DeviceParameter> parameters) {
         deviceParameters = new HashMap<Class<? extends DeviceParameter>, DeviceParameter>(parameters);
